@@ -1,11 +1,1156 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SmileCraft - Premium Dental & Aesthetic Clinic</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dental: {
+                            primary: '#0F766E', // Deep Teal
+                            secondary: '#14B8A6', // Soft Teal
+                            dark: '#0F172A', // Slate Dark
+                            accent: '#F0FDFA', // Light Teal Ice
+                            gold: '#D97706', // Warm Amber Gold
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP for Smooth Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Confetti for Appointment Booking Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAFAF9;
+            color: #1E293B;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0F766E;
+            border-radius: 4px;
+        }
+        /* Before-After slider styling */
+        .slider-container {
+            position: relative;
+            user-select: none;
+        }
+        .img-before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .img-after {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #FFFFFF;
+            cursor: ew-resize;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: #0F766E;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(15, 118, 110, 0.4);
+            pointer-events: none;
+            border: 2px solid #FFFFFF;
+        }
+    </style>
 </head>
-<body>
-    <h1>This is github Learning Course</h1>
+<body class="selection:bg-dental-secondary selection:text-white">
+
+    <!-- TOP EMERGENCY ALERT BAR -->
+    <div class="bg-dental-primary text-white text-xs md:text-sm font-semibold py-2.5 px-4 text-center tracking-wide flex justify-center items-center space-x-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+        <span><strong>24/7 Dental Emergency:</strong> Daant me tez dard hai? Instant relief ke liye call karein: <a href="tel:+919876543210" class="underline hover:text-yellow-300 transition-colors">+91 98765 43210</a></span>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-2.5 group">
+                <div class="w-10 h-10 rounded-xl bg-dental-primary flex items-center justify-center text-white text-xl shadow-md transition-transform group-hover:scale-105">
+                    <i class="fa-solid fa-tooth"></i>
+                </div>
+                <div>
+                    <span class="text-xl md:text-2xl font-serif font-black tracking-wider text-dental-primary block leading-none">
+                        SMILECRAFT
+                    </span>
+                    <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold block mt-1">Dental & Aesthetic Clinic</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <a href="#hero" class="text-dental-primary hover:text-dental-primary transition-colors">Home</a>
+                <a href="#simulator" class="hover:text-dental-primary transition-colors">Smile Simulator</a>
+                <a href="#symptoms" class="hover:text-dental-primary transition-colors">Symptom Checker</a>
+                <a href="#calculator" class="hover:text-dental-primary transition-colors">Cost Estimator</a>
+                <a href="#doctors" class="hover:text-dental-primary transition-colors">Doctors</a>
+            </nav>
+
+            <!-- CTA Call & Booking Buttons -->
+            <div class="flex items-center space-x-4">
+                <a href="tel:+919876543210" class="hidden lg:flex items-center space-x-2 text-dental-primary font-bold text-sm">
+                    <i class="fa-solid fa-phone-volume text-lg text-dental-secondary"></i>
+                    <span>Consultation: 98765 43210</span>
+                </a>
+                
+                <a href="#booking" class="inline-flex items-center space-x-2 bg-dental-primary hover:bg-dental-primary/90 text-white font-bold text-xs md:text-sm px-6 py-3 rounded-xl tracking-wider uppercase shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-calendar-check text-sm"></i>
+                    <span>Appointment Book Karein</span>
+                </a>
+
+                <!-- Mobile Menu Hamburger -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-dental-primary focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute top-20 left-0 w-full p-6 space-y-4 shadow-xl">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block text-dental-primary font-bold py-2">Home</a>
+            <a href="#simulator" onclick="toggleMobileMenu()" class="block text-slate-600 hover:text-dental-primary py-2 transition-colors">Smile Simulator</a>
+            <a href="#symptoms" onclick="toggleMobileMenu()" class="block text-slate-600 hover:text-dental-primary py-2 transition-colors">Symptom Checker</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block text-slate-600 hover:text-dental-primary py-2 transition-colors">Cost Estimator</a>
+            <a href="#doctors" onclick="toggleMobileMenu()" class="block text-slate-600 hover:text-dental-primary py-2 transition-colors">Our Doctors</a>
+            <hr class="border-slate-100">
+            <div class="space-y-3 pt-2">
+                <a href="tel:+919876543210" class="flex items-center space-x-2 text-slate-600 font-bold py-2">
+                    <i class="fa-solid fa-phone-volume text-dental-primary"></i>
+                    <span>Call Helpline: 98765 43210</span>
+                </a>
+                <a href="#booking" onclick="toggleMobileMenu()" class="block bg-dental-primary text-white text-center font-bold py-3.5 rounded-xl tracking-wider uppercase transition-all">
+                    Book Online Appointment
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH TRUST-BUILDING ELEMENTS & DUAL COLUMNS -->
+    <section id="hero" class="relative bg-gradient-to-br from-dental-accent via-white to-slate-50 py-16 md:py-24 px-6 overflow-hidden">
+        <!-- Floating abstract medical grid shapes -->
+        <div class="absolute top-1/4 right-0 w-80 h-80 rounded-full bg-dental-secondary/5 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-dental-primary/5 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <!-- Left Headline Box -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <span class="inline-flex items-center space-x-2 bg-dental-secondary/10 border border-dental-secondary/20 px-4 py-1.5 rounded-full text-xs text-dental-primary font-bold tracking-wider uppercase">
+                    <i class="fa-solid fa-circle-check text-xs"></i>
+                    <span>ISO 9001:2015 Certified Painless Dental Clinic</span>
+                </span>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-semibold leading-tight text-dental-dark">
+                    Aapki Khoobsurat Muskaan, <br>
+                    <span class="text-dental-primary italic">Hamari Sabse Badi Pehchan.</span>
+                </h1>
+                
+                <p class="text-slate-600 text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    Suffer kar rahe hain daanto ke dukh dard se? SmileCraft lekar aaya hai digital advanced technology jahan high-quality treatments (Root Canal, Aligners, Veneers) hote hain bilkul dard-mukt aur aasan.
+                </p>
+
+                <!-- Action CTA buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#booking" class="w-full sm:w-auto text-center px-8 py-4 bg-dental-primary hover:bg-dental-primary/90 text-white font-bold rounded-xl tracking-wider uppercase shadow-lg shadow-dental-primary/20 transition-all duration-300 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-calendar-days mr-2"></i> Book Appointment Now
+                    </a>
+                    <a href="#simulator" class="w-full sm:w-auto text-center px-8 py-4 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold rounded-xl tracking-wider uppercase transition-all duration-300">
+                        <i class="fa-solid fa-wand-magic-sparkles text-dental-secondary mr-2"></i> Smile Simulator
+                    </a>
+                </div>
+
+                <!-- Trust signals & stats -->
+                <div class="grid grid-cols-3 gap-4 pt-10 border-t border-slate-100 max-w-lg mx-auto lg:mx-0">
+                    <div>
+                        <div class="text-2xl md:text-3xl font-serif font-bold text-dental-primary">15,000+</div>
+                        <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Khush Patients</p>
+                    </div>
+                    <div>
+                        <div class="text-2xl md:text-3xl font-serif font-bold text-dental-primary">12+ Years</div>
+                        <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Bemisal Experience</p>
+                    </div>
+                    <div>
+                        <div class="text-2xl md:text-3xl font-serif font-bold text-dental-primary">4.9 ★★★★★</div>
+                        <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Google Rating</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Video/Image Frame with Badge -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="relative w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden group border border-slate-100 shadow-2xl bg-white transition-transform duration-500 hover:scale-[1.01]">
+                    <img id="hero-dentist-img" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=1000" 
+                         alt="Friendly Professional Dentist" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                         onerror="this.src='https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1000'">
+                    
+                    <!-- Consultation Info overlay tag -->
+                    <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-100 shadow-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-[10px] text-dental-primary uppercase tracking-widest font-extrabold">Chief Dental Surgeon</p>
+                            <h4 class="text-lg font-serif font-bold text-slate-800 mt-0.5">Dr. Alok Verma (MDS)</h4>
+                        </div>
+                        <div class="bg-dental-primary text-white p-2.5 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-stethoscope"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating reassurance pill -->
+                <div class="absolute -top-4 -left-4 hidden sm:flex items-center space-x-3 p-4 rounded-2xl bg-white shadow-xl border border-slate-100 animate-bounce" style="animation-duration: 5s;">
+                    <span class="w-2.5 h-2.5 rounded-full bg-teal-500 animate-ping"></span>
+                    <span class="text-xs font-bold text-slate-800">100% Pain-free Technology</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE SMILE SIMULATOR (BEFORE/AFTER DYNAMIC CONTROLLER) -->
+    <section id="simulator" class="py-20 px-6 bg-white relative border-b border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-dental-primary text-xs font-bold uppercase tracking-widest block mb-3">Live Smile Simulator</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-dental-dark">Teeth Whitening Ka Magic Dekhein</h2>
+                <p class="text-slate-500 mt-4">
+                    Neeche diye gaye slider ko slide karke dekhein ki whitening treatment ke baad aapki muskaan kitni aakarshak aur chamakdar ho sakti hai.
+                </p>
+            </div>
+
+            <!-- Interative Comparative Area -->
+            <div class="max-w-3xl mx-auto relative rounded-2xl overflow-hidden border border-slate-100 shadow-2xl aspect-video md:aspect-[16/9]" id="slider-box">
+                <div class="slider-container w-full h-full">
+                    <!-- Before state (Yellow teeth) -->
+                    <div class="img-before" style="background-image: url('https://images.unsplash.com/photo-1513412583491-0d3994c50f7a?auto=format&fit=crop&q=80&w=1200');">
+                        <div class="absolute bottom-4 left-4 bg-black/60 text-white text-xs font-bold uppercase px-3 py-1.5 rounded-lg">Pehle (Before Treatment)</div>
+                    </div>
+                    
+                    <!-- After state (Bright White aligned teeth) -->
+                    <div class="img-after" style="background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=1200'); width: 50%;">
+                        <div class="absolute bottom-4 right-4 bg-dental-primary text-white text-xs font-bold uppercase px-3 py-1.5 rounded-lg z-10">Baad Mein (After SmileCraft)</div>
+                    </div>
+
+                    <!-- Slide divider handle -->
+                    <div class="slider-handle" style="left: 50%;">
+                        <div class="slider-button">
+                            <i class="fa-solid fa-left-right text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-6 text-xs text-slate-400">
+                <i class="fa-solid fa-circle-info mr-1"></i> Slider bar par mouse ya finger touch se drag karein.
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE SYMPTOM CHECKER & TREATMENT MATCHER (NEW UNIQUE SECTION) -->
+    <section id="symptoms" class="py-20 px-6 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-dental-primary text-xs font-bold uppercase tracking-widest block mb-3">Instant Consultation Matcher</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-dental-dark">Apne Symptoms Chunein Aur Ilaaj Jaanein</h2>
+                <p class="text-slate-500 mt-4">
+                    Aapko kaun si pareshani hai? Us par click karein aur humare computer algorithm se pata karein sabsé achha ilaaj kaun sa hai.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+                <!-- Symptoms list (Left) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <label class="block text-xs uppercase tracking-widest text-dental-primary font-bold mb-2">Apna Symptom Select Karein:</label>
+                    
+                    <button onclick="matchSymptom('toothache')" class="symptom-card w-full flex items-center justify-between p-5 rounded-2xl bg-white border border-dental-primary shadow-sm transition-all text-left">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl"><i class="fa-solid fa-face-frown"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-base">Daant Me Tez Dard (Toothache)</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Khate ya peete samay tez thanda-garm lagna.</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-dental-primary"></i>
+                    </button>
+
+                    <button onclick="matchSymptom('yellow')" class="symptom-card w-full flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-dental-primary transition-all text-left">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl"><i class="fa-solid fa-circle-exclamation"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-700 text-base">Peelapan (Stained/Yellow Teeth)</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Khane ke daag, coffee stain ya dhumrapan se rang badalna.</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400"></i>
+                    </button>
+
+                    <button onclick="matchSymptom('crooked')" class="symptom-card w-full flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-dental-primary transition-all text-left">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl"><i class="fa-solid fa-grip-lines-vertical"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-700 text-base">Tedhe Medhe Daant (Alignment)</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Teeth gaps, overlapping ya smile correction zaroorat.</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400"></i>
+                    </button>
+
+                    <button onclick="matchSymptom('bleeding')" class="symptom-card w-full flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-dental-primary transition-all text-left">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl"><i class="fa-solid fa-droplet"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-700 text-base">Masudo Se Khoon (Bleeding Gums)</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Brush karte samay masudo se dard aur bleeding hona.</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400"></i>
+                    </button>
+                </div>
+
+                <!-- Dynamic Recommended Treatment Display (Right) -->
+                <div class="lg:col-span-7 bg-white p-8 rounded-3xl border border-slate-100 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                            <div>
+                                <span class="text-xs text-dental-primary font-bold uppercase tracking-widest block">Recommended Treatment</span>
+                                <h3 class="text-2xl font-serif font-bold text-slate-800 mt-1" id="treatment-title">Advanced Root Canal Therapy</h3>
+                            </div>
+                            <div class="w-16 h-16 rounded-2xl bg-dental-accent flex items-center justify-center text-dental-primary text-2xl" id="treatment-icon">
+                                <i class="fa-solid fa-house-medical"></i>
+                            </div>
+                        </div>
+
+                        <!-- Details bullet list -->
+                        <div class="space-y-3 text-sm text-slate-600">
+                            <p id="treatment-desc">Daant ke ander ke sankeet ko saaf karke safe filling lagayi jati hai taki daant tootne se bach sake.</p>
+                            <div class="grid grid-cols-2 gap-4 pt-4">
+                                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                    <span class="text-xs text-slate-400 uppercase tracking-wider block">Estimated Cost</span>
+                                    <span class="text-base font-bold text-dental-primary" id="treatment-price">₹3,499 se shuru</span>
+                                </div>
+                                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                    <span class="text-xs text-slate-400 uppercase tracking-wider block">Duration</span>
+                                    <span class="text-base font-bold text-slate-700" id="treatment-duration">1 Single Sitting</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Why Choose for this -->
+                        <div class="bg-dental-accent/40 p-4 rounded-xl border border-dental-accent text-xs space-y-2">
+                            <h5 class="font-bold text-dental-primary uppercase tracking-wide">Doctor Ki Salah</h5>
+                            <p class="text-slate-600 leading-relaxed" id="treatment-tip">Is treatment me micro-scope aur painless rotary technology ka istemal kiya jata hai, jiski wajah se bilkul dard nahi hota.</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-100 flex items-center justify-between flex-wrap gap-4">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Smarter Online Booking Price</span>
+                            <span class="text-sm font-bold text-green-600">★ 10% Extra Discount Applied</span>
+                        </div>
+                        <a href="#booking" class="px-6 py-3.5 bg-dental-primary hover:bg-dental-primary/90 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md transform hover:-translate-y-0.5">
+                            Booking Slot Select Karein
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE ESTIMATED TREATMENT COST CALCULATOR -->
+    <section id="calculator" class="py-20 px-6 bg-white relative border-b border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-dental-primary text-xs font-bold uppercase tracking-widest block mb-3">Transparent Pricing Estimator</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-dental-dark">Treatment Budget Calculator</h2>
+                <p class="text-slate-500 mt-4">Transparent aur bina kisi hidden cost ke apne treatment ki approx cost pehle se check karein.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-slate-50 p-6 md:p-10 rounded-3xl border border-slate-200/60 shadow-lg">
+                <h3 class="text-lg font-bold text-slate-800 mb-6 flex items-center space-x-2">
+                    <i class="fa-solid fa-calculator text-dental-primary"></i>
+                    <span>Ek se zyada options select karke estimate jodein:</span>
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="calc-checkbox-grid">
+                    <!-- Checkbox item 1 -->
+                    <label class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:border-dental-primary/50 cursor-pointer transition-all select-none">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" name="dental-calc" value="4500" onchange="calculateTotalCost()" class="w-5 h-5 text-dental-primary focus:ring-dental-primary rounded border-slate-300">
+                            <div>
+                                <span class="font-bold text-slate-800 block text-sm">Root Canal (RCT)</span>
+                                <span class="text-xs text-slate-400">Micro-precision safety RCT</span>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-dental-primary">₹4,500</span>
+                    </label>
+
+                    <!-- Checkbox item 2 -->
+                    <label class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:border-dental-primary/50 cursor-pointer transition-all select-none">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" name="dental-calc" value="3500" onchange="calculateTotalCost()" class="w-5 h-5 text-dental-primary focus:ring-dental-primary rounded border-slate-300">
+                            <div>
+                                <span class="font-bold text-slate-800 block text-sm">Teeth Whitening</span>
+                                <span class="text-xs text-slate-400">Lasers Brightness Therapy</span>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-dental-primary">₹3,500</span>
+                    </label>
+
+                    <!-- Checkbox item 3 -->
+                    <label class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:border-dental-primary/50 cursor-pointer transition-all select-none">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" name="dental-calc" value="55000" onchange="calculateTotalCost()" class="w-5 h-5 text-dental-primary focus:ring-dental-primary rounded border-slate-300">
+                            <div>
+                                <span class="font-bold text-slate-800 block text-sm">Invisible Aligners</span>
+                                <span class="text-xs text-slate-400">Painless custom 3D aligners</span>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-dental-primary">₹55,000</span>
+                    </label>
+
+                    <!-- Checkbox item 4 -->
+                    <label class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:border-dental-primary/50 cursor-pointer transition-all select-none">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" name="dental-calc" value="12000" onchange="calculateTotalCost()" class="w-5 h-5 text-dental-primary focus:ring-dental-primary rounded border-slate-300">
+                            <div>
+                                <span class="font-bold text-slate-800 block text-sm">Ceramic Crowns</span>
+                                <span class="text-xs text-slate-400">Long-lasting natural finish crown</span>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-dental-primary">₹12,000</span>
+                    </label>
+
+                    <!-- Checkbox item 5 -->
+                    <label class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:border-dental-primary/50 cursor-pointer transition-all select-none">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" name="dental-calc" value="1500" onchange="calculateTotalCost()" class="w-5 h-5 text-dental-primary focus:ring-dental-primary rounded border-slate-300">
+                            <div>
+                                <span class="font-bold text-slate-800 block text-sm">Deep Cleaning & Scaling</span>
+                                <span class="text-xs text-slate-400">Plaque & bad breath removal</span>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-dental-primary">₹1,500</span>
+                    </label>
+
+                    <!-- Checkbox item 6 -->
+                    <label class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:border-dental-primary/50 cursor-pointer transition-all select-none">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" name="dental-calc" value="2500" onchange="calculateTotalCost()" class="w-5 h-5 text-dental-primary focus:ring-dental-primary rounded border-slate-300">
+                            <div>
+                                <span class="font-bold text-slate-800 block text-sm">Wisdom Tooth Extraction</span>
+                                <span class="text-xs text-slate-400">Painless wisdom surgical tooth removal</span>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-dental-primary">₹2,500</span>
+                    </label>
+                </div>
+
+                <!-- Total Sum Display Box with interactive discount -->
+                <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div>
+                        <div class="text-sm text-slate-500">Total Estimated Cost (With Online Discount):</div>
+                        <div class="text-3xl md:text-4xl font-serif font-black text-dental-primary mt-1" id="total-calc-price">₹0</div>
+                        <span class="text-xs text-green-600 font-semibold" id="calc-saving-tag">★ Select treatments above to see pricing estimation</span>
+                    </div>
+                    <a href="#booking" class="w-full sm:w-auto px-8 py-4 bg-dental-primary hover:bg-dental-primary/90 text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center shadow-lg transition-all transform active:scale-95">
+                        <i class="fa-solid fa-file-invoice-dollar mr-2"></i> Istemaal karein & Slot Book Karein
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: OUR EXPERT DENTAL DOCTORS -->
+    <section id="doctors" class="py-20 px-6 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-dental-primary text-xs font-bold uppercase tracking-widest block mb-3">Professional Medical Team</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-dental-dark">Miliye Humare Expert Doctors Se</h2>
+                <p class="text-slate-500 mt-4">Aapki dukh-takleef ko pal me door karne ke liye highly trained team available hai.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                <!-- Doctor 1 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-lg flex flex-col sm:flex-row items-center gap-6">
+                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden flex-shrink-0 bg-slate-100">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400" 
+                             alt="Dr Alok Verma Portrait" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=400'">
+                    </div>
+                    <div class="space-y-3 text-center sm:text-left">
+                        <span class="bg-dental-accent text-dental-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Implantologist & Surgeon</span>
+                        <h3 class="text-xl font-serif font-bold text-slate-800">Dr. Alok Verma</h3>
+                        <p class="text-xs text-slate-400 font-semibold">MDS, BDS (AIIMS New Delhi) • 14 Years Exp.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Aapki implants, critical crown placements aur critical gum surgeries ko aasan aur painless banane me expert hain.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-lg flex flex-col sm:flex-row items-center gap-6">
+                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden flex-shrink-0 bg-slate-100">
+                        <img src="https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&q=80&w=400" 
+                             alt="Dr Riya Sen Portrait" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400'">
+                    </div>
+                    <div class="space-y-3 text-center sm:text-left">
+                        <span class="bg-dental-accent text-dental-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Cosmetic Dentist & Aligners Specialist</span>
+                        <h3 class="text-xl font-serif font-bold text-slate-800">Dr. Riya Sen</h3>
+                        <p class="text-xs text-slate-400 font-semibold">MDS (Orthodontics) • 9 Years Exp.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Smile designs, clear Invisalign aligners aur teeth polishing treatments ko beautiful smile dene ke liye desh bhar me prasiddh hain.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: LIVE APPOINTMENT BOOKING SLOT SYSTEM -->
+    <section id="booking" class="py-20 px-6 bg-white relative">
+        <div class="max-w-4xl mx-auto bg-gradient-to-br from-dental-primary via-dental-primary to-emerald-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+            <!-- decorative pattern -->
+            <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+
+            <div class="relative z-10 text-center max-w-xl mx-auto mb-10 space-y-3">
+                <span class="bg-white/10 border border-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider inline-block">Online Booking Engine</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold">Apna Preferred Live Slot Chunein</h2>
+                <p class="text-teal-100 text-sm">Kripya doctor aur date select karein, uske baad online slot book karein.</p>
+            </div>
+
+            <!-- Booking Flow Container -->
+            <form onsubmit="handleBookingForm(event)" class="space-y-6 relative z-10 text-slate-800">
+                <!-- Select doctor and date grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-teal-100 mb-2 font-semibold">1. Doctor Chunein</label>
+                        <select id="book-doctor" onchange="updateAvailableSlots()" class="w-full bg-white border border-slate-200 focus:border-dental-secondary focus:outline-none rounded-xl px-4 py-3.5 text-sm transition-colors">
+                            <option value="Dr. Alok Verma">Dr. Alok Verma (Implants/Surgeries)</option>
+                            <option value="Dr. Riya Sen">Dr. Riya Sen (Smile Aesthetics/Aligners)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-teal-100 mb-2 font-semibold">2. Date Select Karein</label>
+                        <input type="date" id="book-date" required onchange="updateAvailableSlots()" class="w-full bg-white border border-slate-200 focus:border-dental-secondary focus:outline-none rounded-xl px-4 py-3.5 text-sm transition-colors">
+                    </div>
+                </div>
+
+                <!-- Live Dynamic Slot List -->
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-teal-100 mb-3 font-semibold">3. Available Slots (Real-Time Availability):</label>
+                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-2" id="slot-container">
+                        <!-- Dynamic generated slots -->
+                    </div>
+                </div>
+
+                <!-- Patient personal details -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/10">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-teal-100 mb-2 font-semibold">Patient Name</label>
+                        <input type="text" id="patient-name" required placeholder="Apna Poora Naam" class="w-full bg-white border border-slate-200 focus:border-dental-secondary focus:outline-none rounded-xl px-4 py-3.5 text-sm transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-teal-100 mb-2 font-semibold">Mobile Number</label>
+                        <input type="tel" id="patient-phone" required placeholder="Aapka Mobile" class="w-full bg-white border border-slate-200 focus:border-dental-secondary focus:outline-none rounded-xl px-4 py-3.5 text-sm transition-colors">
+                    </div>
+                </div>
+
+                <!-- Submit Trigger button -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full py-4 bg-yellow-500 hover:bg-yellow-400 text-dental-dark font-black text-sm uppercase tracking-wider rounded-xl transition-all transform active:scale-[0.99] shadow-xl">
+                        CONFIRM APPOINTMENT & GENERATE SLIP
+                    </button>
+                    <p class="text-center text-teal-100 text-[10px] mt-3">★ Online slot booking ke liye koi booking fee nahi hai. Payment clinic par consultation ke baad karein.</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS & TRUST SECTION -->
+    <section class="py-20 px-6 bg-slate-50 border-t border-b border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-dental-primary text-xs font-bold uppercase tracking-widest block mb-3">Happy Smiles</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-dental-dark">Patient Hamare Bare Me Kya Kehte Hain</h2>
+            </div>
+
+            <!-- Grid containing premium text cards with rating stars -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-md flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-500 space-x-1 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed italic">
+                            "Mera dukh-dard Dr. Alok ke root canal treatment se pal bhar me gayab ho gaya. Pata hi nahi chala ki treatment kab khatam ho gaya. Pure clinic me digital pain-free systems hain. Dhanyawad!"
+                        </p>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-dental-accent flex items-center justify-center font-bold text-dental-primary text-sm">V</div>
+                        <div>
+                            <h4 class="text-slate-800 font-bold text-sm">Vikram Malhotra</h4>
+                            <p class="text-xs text-slate-400 font-medium">Bhopal, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-md flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-500 space-x-1 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed italic">
+                            "Invisalign aligners ke liye mai SmileCraft aayi thi. Meri alignment treatment bilkul flawless thi aur sabse aakarshak baat inki pure transparency aur honest behaviour thi."
+                        </p>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-dental-accent flex items-center justify-center font-bold text-dental-primary text-sm">P</div>
+                        <div>
+                            <h4 class="text-slate-800 font-bold text-sm">Priya Sharma</h4>
+                            <p class="text-xs text-slate-400 font-medium">Pune, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-md flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-500 space-x-1 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed italic">
+                            "Clinic ki cleanliness aur advanced instruments ka level standard world class hai. Staff patient ke sath behad respectful aur soft spoke hai. Appointment systems live hai aur waiting nahi karna padta."
+                        </p>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-dental-accent flex items-center justify-center font-bold text-dental-primary text-sm">A</div>
+                        <div>
+                            <h4 class="text-slate-800 font-bold text-sm">Amit Verma</h4>
+                            <p class="text-xs text-slate-400 font-medium">Noida, India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ ACCORDION SECTION -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-dental-primary text-xs font-bold uppercase tracking-widest block mb-3">Sawaal Jawab</span>
+                <h2 class="text-3xl font-serif font-bold text-dental-dark">Aksar Pooche Jane Wale Sawaal</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                    <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-5 bg-slate-50 hover:bg-slate-50/50 text-left transition-colors">
+                        <span class="font-bold text-sm md:text-base text-slate-800">Kya Treatments me dard (Pain) hota hai?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400"></i>
+                    </button>
+                    <div class="hidden p-5 bg-white text-xs md:text-sm text-slate-500 border-t border-slate-100 leading-relaxed">
+                        Ji nahi! SmileCraft me hum electronic precision painless anesthesia injection syrings aur rotary handpiece technology use karte hain jisse patient ko bilkul bhi pain mehsoos nahi hota.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                    <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-5 bg-slate-50 hover:bg-slate-50/50 text-left transition-colors">
+                        <span class="font-bold text-sm md:text-base text-slate-800">Online Slot Booking ke baad kya waiting karni padti hai?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400"></i>
+                    </button>
+                    <div class="hidden p-5 bg-white text-xs md:text-sm text-slate-500 border-t border-slate-100 leading-relaxed">
+                        Hum patient convenience ko sabsé aage rakhte hain. Agar aapka slot 11:30 AM ka booked hai toh aapko wait nahi karna padega, seedhe doctor session shuru ho jayega.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                    <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-5 bg-slate-50 hover:bg-slate-50/50 text-left transition-colors">
+                        <span class="font-bold text-sm md:text-base text-slate-800">Invisalign Aligners treatment ka kitna kharch hota hai?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400"></i>
+                    </button>
+                    <div class="hidden p-5 bg-white text-xs md:text-sm text-slate-500 border-t border-slate-100 leading-relaxed">
+                        Invisalign clear aligners cases ki treatment complexity ke hisab se customized hoti hai. Iski range lagbhag ₹45,000 se shuru hoti hai aur flexible EMI options bhi humare paas uplabdh hain.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOM DIALOG INTERACTIVE MODAL (RECEIPT / SLIP GENERATOR) -->
+    <div id="custom-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-6 bg-black/85 backdrop-blur-sm">
+        <div class="bg-white max-w-md w-full rounded-3xl overflow-hidden shadow-2xl relative border border-slate-100">
+            <!-- Slip receipt top decorative -->
+            <div class="bg-dental-primary p-6 text-center text-white space-y-2">
+                <div class="w-12 h-12 bg-white/10 text-white rounded-full flex items-center justify-center text-2xl mx-auto">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="text-xl font-serif font-bold">Booking Confirmed!</h3>
+                <p class="text-xs text-teal-100">Appointment slip niche se download ya screenshot karein.</p>
+            </div>
+
+            <!-- Receipt slip contents -->
+            <div class="p-6 space-y-4 text-xs md:text-sm text-slate-600">
+                <div class="flex justify-between pb-2 border-b border-dashed border-slate-200">
+                    <span class="font-bold text-slate-400">Patient Name:</span>
+                    <strong id="receipt-patient" class="text-slate-800">Rahul Roy</strong>
+                </div>
+                <div class="flex justify-between pb-2 border-b border-dashed border-slate-200">
+                    <span class="font-bold text-slate-400">Consultant:</span>
+                    <strong id="receipt-doctor" class="text-slate-800">Dr. Alok Verma</strong>
+                </div>
+                <div class="flex justify-between pb-2 border-b border-dashed border-slate-200">
+                    <span class="font-bold text-slate-400">Appointment Date:</span>
+                    <strong id="receipt-date" class="text-slate-800">2026-06-01</strong>
+                </div>
+                <div class="flex justify-between pb-2 border-b border-dashed border-slate-200">
+                    <span class="font-bold text-slate-400">Scheduled Time Slot:</span>
+                    <strong id="receipt-slot" class="text-dental-primary font-bold">11:00 AM - 11:30 AM</strong>
+                </div>
+                <div class="flex justify-between pb-2 border-b border-dashed border-slate-200">
+                    <span class="font-bold text-slate-400">Token ID:</span>
+                    <strong id="receipt-token" class="text-yellow-600 font-extrabold font-mono">SC-403928</strong>
+                </div>
+
+                <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 text-[11px] text-slate-400 flex items-start space-x-2">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
+                    <span>Kripya scheduled time se 10 min pehle clinic par zaroor pahunchein.</span>
+                </div>
+            </div>
+
+            <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3">
+                <button onclick="closeModal()" class="w-full py-3.5 bg-dental-primary hover:bg-dental-primary/90 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
+                    Theek Hai, Done!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN FOOTER SECTION -->
+    <footer class="bg-dental-dark text-slate-400 py-16 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+            <!-- Branding logo & intro -->
+            <div class="space-y-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-lg bg-dental-primary flex items-center justify-center text-white text-base">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+                    <span class="text-xl font-serif font-black tracking-widest text-white">SMILECRAFT</span>
+                </div>
+                <p class="text-xs leading-relaxed">
+                    Digital technology aur aesthetic specialists ke sath, aapki muskaan ko chamakdar banana hamari prathmikta hai. World-class treatments, affordable rates me.
+                </p>
+                <div class="flex space-x-4 pt-2">
+                    <a href="#" class="hover:text-dental-secondary transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+                    <a href="#" class="hover:text-dental-secondary transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
+                    <a href="#" class="hover:text-dental-secondary transition-colors"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                </div>
+            </div>
+
+            <!-- Important links -->
+            <div>
+                <h4 class="text-xs uppercase tracking-wider text-white font-bold mb-4">Clinic Treatments</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#symptoms" class="hover:text-white transition-colors">Micro Root Canal</a></li>
+                    <li><a href="#symptoms" class="hover:text-white transition-colors">Lasers Teeth Whitening</a></li>
+                    <li><a href="#symptoms" class="hover:text-white transition-colors">Invisalign Clear Aligners</a></li>
+                    <li><a href="#symptoms" class="hover:text-white transition-colors">Dental Crown & Veneers</a></li>
+                </ul>
+            </div>
+
+            <!-- Timings -->
+            <div>
+                <h4 class="text-xs uppercase tracking-wider text-white font-bold mb-4">Clinic Timings</h4>
+                <ul class="space-y-2 text-xs">
+                    <li>Somvaar - Shanivaar: <span class="text-white">09:00 AM - 08:30 PM</span></li>
+                    <li>Ravivaar: <span class="text-red-400">Strictly Emergency Only</span></li>
+                    <li class="pt-2"><span class="text-dental-secondary"><i class="fa-solid fa-clock mr-1"></i> Waiting time: 0 Mins</span></li>
+                </ul>
+            </div>
+
+            <!-- Location info -->
+            <div class="space-y-4">
+                <h4 class="text-xs uppercase tracking-wider text-white font-bold">Humara Address</h4>
+                <p class="text-xs leading-relaxed">
+                    A-102, Near Metro Station Gate No. 2, Sector 15, New Delhi - 110001
+                </p>
+                <div class="pt-2">
+                    <a href="https://maps.google.com" target="_blank" class="text-xs font-bold text-dental-secondary hover:underline">
+                        <i class="fa-solid fa-location-dot mr-1"></i> View on Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-800 text-center text-[10px] text-slate-500">
+            <p>© 2026 SmileCraft Aesthetic Clinic. All dental treatment procedures are certified by registered clinical professionals.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT ENGINE -->
+    <script>
+        // Set Default Date in Booking Input to Today
+        window.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('book-date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+            dateInput.value = today;
+            
+            // Populate Slots
+            updateAvailableSlots();
+        });
+
+        // Toggle Mobile Menu Drawer
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = "fa-solid fa-xmark text-2xl";
+            } else {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars text-2xl";
+            }
+        }
+
+        // BEFORE-AFTER SMILE SIMULATOR ENGINE (Pure JS Touch & Click Events)
+        const sliderBox = document.getElementById('slider-box');
+        const imgAfter = document.querySelector('.img-after');
+        const sliderHandle = document.querySelector('.slider-handle');
+
+        let isResizing = false;
+
+        function updateSlider(xPosition) {
+            const rect = sliderBox.getBoundingClientRect();
+            let relativeX = xPosition - rect.left;
+            
+            // Restrict movement within container boundaries
+            if (relativeX < 0) relativeX = 0;
+            if (relativeX > rect.width) relativeX = rect.width;
+
+            const percentage = (relativeX / rect.width) * 100;
+            imgAfter.style.width = `${100 - percentage}%`;
+            sliderHandle.style.left = `${percentage}%`;
+        }
+
+        sliderBox.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            updateSlider(e.clientX);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            updateSlider(e.clientX);
+        });
+
+        window.addEventListener('mouseup', () => {
+            isResizing = false;
+        });
+
+        // Touch interactions for Mobile Compatibility
+        sliderBox.addEventListener('touchstart', (e) => {
+            isResizing = true;
+            updateSlider(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isResizing) return;
+            updateSlider(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchend', () => {
+            isResizing = false;
+        });
+
+
+        // SYMPTOM CHECKER & TREATMENT MATCHER ENGINE
+        const symptomData = {
+            toothache: {
+                title: "Advanced Root Canal Therapy",
+                iconClass: "fa-solid fa-house-medical",
+                desc: "Daant ke andar ki sadan aur bacteria ko clean karke modern laser technology se temporary/permanent filling ki jati hai.",
+                price: "₹3,499 se shuru",
+                duration: "1 Single Sitting (Painless)",
+                tip: "SmileCraft me computer-controlled anesthesia use kiya jata hai jisse injection lagte samay bhi dard nahi hota."
+            },
+            yellow: {
+                title: "Laser Teeth Whitening & Polishing",
+                iconClass: "fa-solid fa-wand-magic-sparkles",
+                desc: "Clinical laser whitening process se coffee stain, smoking marks aur purana peelapan hata kar 8 shade chamakdar teeth banaye jate hain.",
+                price: "₹1,999 se shuru",
+                duration: "45 Minutes",
+                tip: "Clinical whitening se home treatments ke muqable 10x behtar aur durable result milta hai."
+            },
+            crooked: {
+                title: "3D Clear Invisalign Aligners",
+                iconClass: "fa-solid fa-grip-lines-vertical",
+                desc: "Bin-dikhne wale clear soft braces jo bilkul comfortable hain aur aapki alignment, spacing and bite ko modern aesthetic looks dete hain.",
+                price: "₹45,000 se shuru",
+                duration: "6 se 12 Mahine",
+                tip: "Is treatment me koi metals ya wires nahi hote, isliye na hi koi asuvidha hoti hai aur na hi dukh-dard."
+            },
+            bleeding: {
+                title: "Micro-Ultrasonic Scaling & Gum Therapy",
+                iconClass: "fa-solid fa-droplet",
+                desc: "Gum tissues aur roots ki micro plaque clean ki jati hai, jisse bad breath (saans ki badboo) aur gums ki bleeding bilkul theek ho jati hai.",
+                price: "₹1,200 se shuru",
+                duration: "30 Minutes",
+                tip: "Gums strong rehne par hi teeth ki life double hoti hai. Doctor saal me 2 baar scaling recommend karte hain."
+            }
+        };
+
+        function matchSymptom(key) {
+            // Update selected button style
+            const cards = document.querySelectorAll('.symptom-card');
+            cards.forEach(card => {
+                card.classList.remove('border-dental-primary');
+                card.classList.add('border-slate-100');
+                card.querySelector('i:last-child').className = "fa-solid fa-chevron-right text-slate-400";
+            });
+
+            event.currentTarget.classList.remove('border-slate-100');
+            event.currentTarget.classList.add('border-dental-primary');
+            event.currentTarget.querySelector('i:last-child').className = "fa-solid fa-chevron-right text-dental-primary";
+
+            const matched = symptomData[key];
+            if (!matched) return;
+
+            // Animate details change
+            const titleEl = document.getElementById('treatment-title');
+            const descEl = document.getElementById('treatment-desc');
+            const priceEl = document.getElementById('treatment-price');
+            const durationEl = document.getElementById('treatment-duration');
+            const tipEl = document.getElementById('treatment-tip');
+            const iconEl = document.getElementById('treatment-icon');
+
+            gsap.to([titleEl, descEl, priceEl, durationEl, tipEl], {
+                opacity: 0,
+                y: -10,
+                duration: 0.15,
+                onComplete: () => {
+                    titleEl.innerText = matched.title;
+                    descEl.innerText = matched.desc;
+                    priceEl.innerText = matched.price;
+                    durationEl.innerText = matched.duration;
+                    tipEl.innerText = matched.tip;
+                    iconEl.innerHTML = `<i class="${matched.iconClass}"></i>`;
+
+                    gsap.to([titleEl, descEl, priceEl, durationEl, tipEl], { opacity: 1, y: 0, duration: 0.3 });
+                }
+            });
+        }
+
+
+        // TREATMENT ESTIMATED COST CALCULATOR ENGINE
+        function calculateTotalCost() {
+            const checkboxes = document.querySelectorAll('input[name="dental-calc"]:checked');
+            let total = 0;
+
+            checkboxes.forEach(cb => {
+                total += parseFloat(cb.value);
+            });
+
+            const priceEl = document.getElementById('total-calc-price');
+            const savingTag = document.getElementById('calc-saving-tag');
+
+            // Apply 10% online discount if selected
+            let finalPrice = total;
+            let saving = 0;
+            if (total > 0) {
+                saving = Math.round(total * 0.1);
+                finalPrice = total - saving;
+                savingTag.innerText = `★ Online Special Promo Applied: Bachayein ₹${saving.toLocaleString('en-IN')}!`;
+                savingTag.className = "text-xs text-green-600 font-bold block mt-1";
+            } else {
+                savingTag.innerText = "★ Select treatments above to see pricing estimation";
+                savingTag.className = "text-xs text-slate-400 font-semibold block mt-1";
+            }
+
+            priceEl.innerText = `₹${finalPrice.toLocaleString('en-IN')}`;
+        }
+
+
+        // LIVE APPOINTMENT BOOKING SLOT SYSTEM ENGINE
+        const slotsDb = {
+            "Dr. Alok Verma": ["09:30 AM", "11:00 AM", "12:30 PM", "04:00 PM", "05:30 PM", "07:00 PM"],
+            "Dr. Riya Sen": ["10:00 AM", "11:30 AM", "01:00 PM", "03:30 PM", "05:00 PM", "06:30 PM"]
+        };
+
+        let selectedSlot = "";
+
+        function updateAvailableSlots() {
+            const doctor = document.getElementById('book-doctor').value;
+            const container = document.getElementById('slot-container');
+            container.innerHTML = "";
+
+            const rawSlots = slotsDb[doctor] || [];
+            selectedSlot = ""; // reset chosen slot
+
+            rawSlots.forEach((slot, idx) => {
+                const btn = document.createElement('button');
+                btn.type = "button";
+                btn.className = "slot-btn p-3 text-xs md:text-sm font-bold bg-white text-slate-700 border border-slate-200 rounded-xl hover:border-dental-secondary text-center transition-all";
+                btn.innerText = slot;
+                btn.onclick = (e) => {
+                    const allBtns = document.querySelectorAll('.slot-btn');
+                    allBtns.forEach(b => b.className = "slot-btn p-3 text-xs md:text-sm font-bold bg-white text-slate-700 border border-slate-200 rounded-xl hover:border-dental-secondary text-center transition-all");
+                    
+                    e.currentTarget.className = "slot-btn p-3 text-xs md:text-sm font-bold bg-yellow-500 text-dental-dark border border-yellow-500 rounded-xl text-center transition-all shadow-md";
+                    selectedSlot = slot;
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function handleBookingForm(event) {
+            event.preventDefault();
+            const doctor = document.getElementById('book-doctor').value;
+            const date = document.getElementById('book-date').value;
+            const patient = document.getElementById('patient-name').value;
+            const phone = document.getElementById('patient-phone').value;
+
+            if (!selectedSlot) {
+                alertModal("Slot Chunein", "Kripya appointment confirm karne se pehle upar se ek slot select karein.", false);
+                return;
+            }
+
+            // Generate receipt slip details
+            document.getElementById('receipt-patient').innerText = patient;
+            document.getElementById('receipt-doctor').innerText = doctor;
+            document.getElementById('receipt-date').innerText = date;
+            document.getElementById('receipt-slot').innerText = selectedSlot;
+            
+            // Generate Random unique Token ID
+            const randomToken = "SC-" + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('receipt-token').innerText = randomToken;
+
+            // Trigger success celebration confetti!
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Open Receipt Modal
+            const modal = document.getElementById('custom-modal');
+            modal.classList.remove('hidden');
+
+            event.target.reset();
+            updateAvailableSlots(); // Reset slots view
+        }
+
+        function alertModal(title, msg, isSuccess) {
+            // Basic Modal visual wrapper fallback for validations
+            const modal = document.getElementById('custom-modal');
+            document.getElementById('receipt-patient').innerText = "Validation error";
+            document.getElementById('receipt-doctor').innerText = "Booking System";
+            document.getElementById('receipt-date').innerText = "N/A";
+            document.getElementById('receipt-slot').innerText = msg;
+            document.getElementById('receipt-token').innerText = "Err";
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+
+        // FAQ ACCORDION TRIGGER
+        function toggleFAQ(button) {
+            const body = button.nextElementSibling;
+            const icon = button.querySelector('i');
+
+            if (body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                icon.className = "fa-solid fa-chevron-up text-dental-primary";
+            } else {
+                body.classList.add('hidden');
+                icon.className = "fa-solid fa-chevron-down text-slate-400";
+            }
+        }
+
+        // GSAP Parallax Elements on Scroll trigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from("#hero h1", {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            delay: 0.2
+        });
+
+        gsap.from("#hero p", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 0.4
+        });
+
+        gsap.from("#hero-dentist-img", {
+            scale: 1.1,
+            duration: 1.5,
+            ease: "power2.out"
+        });
+    </script>
 </body>
 </html>
+
+```

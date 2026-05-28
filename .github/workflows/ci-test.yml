@@ -1,0 +1,8 @@
+name: Hello GitHub Actions
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome Message
+        run: echo "Hey Aditya, your automated DevOps pipeline is running!"

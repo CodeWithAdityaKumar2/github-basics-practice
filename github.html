@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub Interactive Master Cheat-Sheet</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons for developer feel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        git: {
+                            orange: '#F05032',
+                            dark: '#0F172A',
+                            accent: '#38BDF8',
+                            slate: '#1E293B',
+                            green: '#10B981',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0F19;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(240, 80, 50, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .terminal-shadow {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F05032;
+        }
+    </style>
+</head>
+<body class="text-slate-100 font-sans antialiased min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 glass border-b border-slate-800/80 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3">
+                <div class="bg-git-orange/10 p-2.5 rounded-xl border border-git-orange/35 animate-pulse">
+                    <i class="fa-brands fa-git-alt text-3xl text-git-orange"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-git-orange bg-clip-text text-transparent">GitMaster Pro</h1>
+                    <p class="text-xs text-slate-400 font-medium">Interactive Devops & Version Control Hub</p>
+                </div>
+            </div>
+            <!-- Quick Info Badges -->
+            <div class="flex items-center gap-3">
+                <span class="text-xs bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1.5 text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-git-green animate-ping"></span> Live Practice Mode
+                </span>
+                <span class="text-xs bg-git-orange/10 text-git-orange px-3 py-1.5 rounded-lg border border-git-orange/20 font-semibold">
+                    Version 2.5-DevOps
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-12">
+        
+        <!-- Hero Section & Motivational Banner -->
+        <section class="glass rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-git-orange/5 rounded-full filter blur-[100px] pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-git-accent/5 rounded-full filter blur-[100px] pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-3xl">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-git-orange/10 text-git-orange mb-4 border border-git-orange/20">
+                    <i class="fa-solid fa-graduation-cap"></i> Interactive Learn-by-Doing Portal
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-4">
+                    Git aur GitHub ki Duniya ka <span class="bg-gradient-to-r from-git-orange to-git-accent bg-clip-text text-transparent">Ultimate Cheat-Sheet Engine</span>
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base mb-6 leading-relaxed">
+                    Savi basic se lekar advanced automated pipelines, real-time merge conflict solver, local-remote simulation, aur .gitignore setups ko ek hi page par practically seekhein aur control karein. Code, test, aur automatic deploy hone wale workflow ko live simulate karein!
+                </p>
+                <div class="flex flex-wrap gap-4 text-xs font-mono">
+                    <div class="bg-slate-900/90 px-4 py-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
+                        <span class="text-git-orange">🚀 Fast:</span> Zero installation needed to learn
+                    </div>
+                    <div class="bg-slate-900/90 px-4 py-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
+                        <span class="text-git-accent">💻 Interactive:</span> Live Simulator included
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Simulator Tab Section -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <div class="space-y-1">
+                    <h3 class="text-2xl font-bold tracking-tight">🎮 Live Git Lifecycle Simulator</h3>
+                    <p class="text-sm text-slate-400">Commands type karein ya direct buttons dabakar files ko physical Git areas me transfer hote hue live dekhein.</p>
+                </div>
+                <button onclick="resetSimulator()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition duration-200">
+                    <i class="fa-solid fa-rotate-left mr-1.5"></i> Reset Board
+                </button>
+            </div>
+
+            <!-- Simulator Card Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Controller Panel (Visual Buttons & Simulated Terminal) -->
+                <div class="lg:col-span-5 flex flex-col space-y-4">
+                    <!-- Virtual Command Line -->
+                    <div class="glass rounded-2xl overflow-hidden flex-1 flex flex-col terminal-shadow">
+                        <div class="bg-slate-950 px-4 py-2.5 flex items-center justify-between border-b border-slate-800/60">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                            </div>
+                            <span class="text-xs font-mono text-slate-500">git-interactive-terminal</span>
+                        </div>
+                        <div class="p-4 bg-slate-950 font-mono text-xs sm:text-sm space-y-2 flex-1 overflow-y-auto min-h-[180px] max-h-[300px]" id="terminalHistory">
+                            <div class="text-slate-500"># Git project initialize karne ke liye start dabayein</div>
+                            <div class="text-slate-400"><span class="text-git-green">aditya@dev-machine:~$</span> git init</div>
+                            <div class="text-slate-500">Initialized empty Git repository in /users/aditya/project/.git/</div>
+                        </div>
+                        <div class="bg-slate-900/60 p-3 border-t border-slate-800/80 flex items-center gap-2">
+                            <span class="text-git-orange font-mono text-sm font-bold">$</span>
+                            <input type="text" id="terminalInput" placeholder="Command type karein (e.g. git add .)..." onkeydown="handleTerminalCommand(event)" class="bg-transparent text-slate-100 font-mono text-sm focus:outline-none flex-1">
+                            <span class="text-xs text-slate-500 hidden sm:inline">Press Enter</span>
+                        </div>
+                    </div>
+
+                    <!-- Macro Controller Buttons for quick click -->
+                    <div class="glass rounded-2xl p-4 space-y-3">
+                        <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Quick Commands Panel</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="executeSimCommand('git init')" class="p-2.5 text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 border border-slate-700/60 rounded-xl transition flex items-center justify-between group">
+                                <span>git init</span>
+                                <i class="fa-solid fa-play text-[10px] text-slate-500 group-hover:text-git-orange"></i>
+                            </button>
+                            <button onclick="executeSimCommand('git add .')" class="p-2.5 text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 border border-slate-700/60 rounded-xl transition flex items-center justify-between group">
+                                <span>git add .</span>
+                                <i class="fa-solid fa-play text-[10px] text-slate-500 group-hover:text-git-orange"></i>
+                            </button>
+                            <button onclick="executeSimCommand('git commit -m')" class="p-2.5 text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 border border-slate-700/60 rounded-xl transition flex items-center justify-between group">
+                                <span>git commit -m</span>
+                                <i class="fa-solid fa-play text-[10px] text-slate-500 group-hover:text-git-orange"></i>
+                            </button>
+                            <button onclick="executeSimCommand('git push')" class="p-2.5 text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 border border-slate-700/60 rounded-xl transition flex items-center justify-between group">
+                                <span>git push</span>
+                                <i class="fa-solid fa-play text-[10px] text-slate-500 group-hover:text-git-orange"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Stages Map Panel -->
+                <div class="lg:col-span-7 glass rounded-2xl p-4 sm:p-6 flex flex-col justify-between space-y-6">
+                    <h4 class="text-sm font-bold tracking-tight text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                        <i class="fa-solid fa-sitemap text-git-orange"></i> Visual File States Map
+                    </h4>
+                    
+                    <!-- The 4 Stages Layout (Working -> Staging -> Local Repo -> GitHub) -->
+                    <div class="grid grid-cols-4 gap-2 sm:gap-4 relative py-4">
+                        
+                        <!-- 1. Working Directory -->
+                        <div class="relative bg-slate-900/60 border border-slate-800 rounded-xl p-3 flex flex-col items-center min-h-[140px] text-center">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase mb-2">1. Working Dir</span>
+                            <div class="flex-1 flex flex-col justify-center items-center w-full" id="stageWorking">
+                                <div class="bg-red-500/10 border border-red-500/20 text-red-400 px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1 mb-1 animate-bounce" id="simFile">
+                                    <i class="fa-solid fa-file-code"></i> index.html
+                                </div>
+                                <div class="bg-red-500/10 border border-red-500/20 text-red-400 px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1" id="simStyleFile">
+                                    <i class="fa-solid fa-file-code"></i> style.css
+                                </div>
+                            </div>
+                            <span class="text-[9px] text-slate-500 mt-2 font-mono" id="labelWorking">Untracked/Modified</span>
+                        </div>
+
+                        <!-- 2. Staging Area -->
+                        <div class="relative bg-slate-900/60 border border-slate-800 rounded-xl p-3 flex flex-col items-center min-h-[140px] text-center">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase mb-2">2. Staging</span>
+                            <div class="flex-1 flex flex-col justify-center items-center w-full" id="stageStaging">
+                                <!-- Dynamically added files go here -->
+                            </div>
+                            <span class="text-[9px] text-slate-500 mt-2 font-mono" id="labelStaging">Ready to Commit</span>
+                        </div>
+
+                        <!-- 3. Local Repository -->
+                        <div class="relative bg-slate-900/60 border border-slate-800 rounded-xl p-3 flex flex-col items-center min-h-[140px] text-center">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase mb-2">3. Local Repo</span>
+                            <div class="flex-1 flex flex-col justify-center items-center w-full" id="stageLocal">
+                                <!-- Dynamically added commits go here -->
+                            </div>
+                            <span class="text-[9px] text-slate-500 mt-2 font-mono" id="labelLocal">Committed/Saved</span>
+                        </div>
+
+                        <!-- 4. GitHub Cloud -->
+                        <div class="relative bg-slate-900/60 border border-slate-800 rounded-xl p-3 flex flex-col items-center min-h-[140px] text-center">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase mb-2">4. Remote (Cloud)</span>
+                            <div class="flex-1 flex flex-col justify-center items-center w-full" id="stageCloud">
+                                <!-- Dynamically pushed files go here -->
+                            </div>
+                            <span class="text-[9px] text-slate-500 mt-2 font-mono" id="labelCloud">GitHub Server</span>
+                        </div>
+                    </div>
+
+                    <!-- Description Feedback of current state -->
+                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 flex items-start gap-3">
+                        <div class="p-2 bg-git-accent/10 rounded-lg text-git-accent text-sm mt-0.5">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <h5 class="text-xs font-bold text-slate-300">Simulator Status:</h5>
+                            <p class="text-xs text-slate-400 leading-relaxed" id="simulatorFeedback">
+                                Aapki files abhi local working directory me unsaved hain. `git init` command chalakar repository setup karein aur file life-cycle start karein.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Advanced Visual Tools Grid (Merge Conflicts & .gitignore Generator) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Tool A: Interactive Merge Conflict Visualizer -->
+            <div class="glass rounded-3xl p-6 flex flex-col justify-between space-y-6">
+                <div>
+                    <span class="px-2.5 py-1 text-[10px] font-semibold bg-red-500/10 text-red-400 border border-red-500/20 rounded-full">Interactive visualizer</span>
+                    <h4 class="text-xl font-extrabold mt-2 tracking-tight">💥 Merge Conflict Resolving Arena</h4>
+                    <p class="text-slate-400 text-xs mt-1">Sikhein jab conflicts aate hain toh file ka code kaise badalta hai aur use kaise live resolve karte hain.</p>
+                </div>
+
+                <!-- Simulation Visual Field -->
+                <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800">
+                    <div class="px-4 py-2 bg-slate-900 border-b border-slate-800 flex items-center justify-between text-xs font-mono">
+                        <span class="text-red-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> conflict-file.txt</span>
+                        <span class="text-slate-500 font-bold">Merge Conflict Mode</span>
+                    </div>
+                    <div class="p-4 font-mono text-xs sm:text-sm space-y-1 leading-normal" id="conflictViewer">
+                        <!-- Default state -->
+                        <div class="text-slate-500">&lt;!-- Conflict visualizer control panel se branch select karein --&gt;</div>
+                        <div class="text-slate-400">Original text by Aditya: Line 1</div>
+                    </div>
+                </div>
+
+                <!-- Visualizer Controls -->
+                <div class="space-y-3">
+                    <div class="flex gap-2 flex-wrap">
+                        <button onclick="triggerConflictSimulation()" class="px-3 py-2 bg-red-600/20 hover:bg-red-600/35 border border-red-500/30 text-xs font-bold rounded-lg transition duration-150 flex items-center gap-1.5 text-red-300">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Trigger Conflict!
+                        </button>
+                        <button onclick="resolveConflict('current')" id="btnAcceptCurrent" disabled class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition duration-150 text-slate-400 cursor-not-allowed">
+                            Accept Current (Branch A)
+                        </button>
+                        <button onclick="resolveConflict('incoming')" id="btnAcceptIncoming" disabled class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition duration-150 text-slate-400 cursor-not-allowed">
+                            Accept Incoming (Branch B)
+                        </button>
+                        <button onclick="resolveConflict('both')" id="btnAcceptBoth" disabled class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition duration-150 text-slate-400 cursor-not-allowed">
+                            Keep Both Changes
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-slate-400 italic" id="conflictHelpText">
+                        "Trigger Conflict" button dabayein jab aapne aur aapke dost ne ek hi line par do alag branches se edit kiya ho.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tool B: Smart .gitignore Template Generator -->
+            <div class="glass rounded-3xl p-6 flex flex-col justify-between space-y-6">
+                <div>
+                    <span class="px-2.5 py-1 text-[10px] font-semibold bg-git-accent/10 text-git-accent border border-git-accent/20 rounded-full">Utility engine</span>
+                    <h4 class="text-xl font-extrabold mt-2 tracking-tight">📁 Smart .gitignore Generator</h4>
+                    <p class="text-slate-400 text-xs mt-1">Tech stack select karein aur unke folders ko Git indexing se bachaane ke liye code generate karein.</p>
+                </div>
+
+                <!-- Template Selector buttons -->
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="generateIgnore('node')" id="btnNode" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold rounded-xl transition duration-150 flex flex-col items-center gap-1.5">
+                        <i class="fa-brands fa-node text-xl text-green-400"></i>
+                        <span>NodeJS / React</span>
+                    </button>
+                    <button onclick="generateIgnore('python')" id="btnPython" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold rounded-xl transition duration-150 flex flex-col items-center gap-1.5">
+                        <i class="fa-brands fa-python text-xl text-blue-400"></i>
+                        <span>Python Django</span>
+                    </button>
+                    <button onclick="generateIgnore('unity')" id="btnUnity" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold rounded-xl transition duration-150 flex flex-col items-center gap-1.5">
+                        <i class="fa-solid fa-cubes text-xl text-yellow-400"></i>
+                        <span>Unity / Game</span>
+                    </button>
+                </div>
+
+                <!-- Resulting .gitignore block -->
+                <div class="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800">
+                    <div class="px-4 py-2 bg-slate-900 border-b border-slate-800 flex items-center justify-between text-xs font-mono">
+                        <span class="text-slate-400"><i class="fa-regular fa-eye-slash mr-1"></i> .gitignore preview</span>
+                        <button onclick="copyIgnoreText()" class="text-git-accent hover:text-white transition duration-150 text-[10px] uppercase font-bold flex items-center gap-1">
+                            <i class="fa-regular fa-copy"></i> Copy code
+                        </button>
+                    </div>
+                    <pre class="p-4 font-mono text-[10px] sm:text-xs text-slate-400 overflow-y-auto max-h-[120px] leading-relaxed" id="ignoreResult"># Apne tech stack ke icon par click karke preview karein.</pre>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Command Directory with Roadmap categories -->
+        <section class="space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="space-y-1">
+                    <h3 class="text-2xl font-bold tracking-tight">📚 The Complete Git Cheat-Sheet Directory</h3>
+                    <p class="text-sm text-slate-400">6 Roadmap phases ke saari major aur minor commands ka systematic dynamic control.</p>
+                </div>
+                <!-- Search bar for finding commands -->
+                <div class="relative w-full md:w-80">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input type="text" id="commandSearch" placeholder="Command search karein (e.g. merge)..." onkeyup="filterCommands()" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2.5 pl-9 pr-4 text-xs font-mono text-slate-200 focus:outline-none focus:ring-1 focus:ring-git-orange focus:border-git-orange">
+                </div>
+            </div>
+
+            <!-- Categories Tabs to instantly filter by phase -->
+            <div class="flex flex-wrap gap-2 pb-2 border-b border-slate-800">
+                <button onclick="switchCategory('all')" id="tab_all" class="px-4 py-2 text-xs font-semibold rounded-lg bg-git-orange text-white border border-git-orange transition duration-150">
+                    All Phases
+                </button>
+                <button onclick="switchCategory('phase1')" id="tab_phase1" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-300 transition duration-150">
+                    Phase 1: Basics
+                </button>
+                <button onclick="switchCategory('phase2')" id="tab_phase2" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-300 transition duration-150">
+                    Phase 2: Branching
+                </button>
+                <button onclick="switchCategory('phase3')" id="tab_phase3" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-300 transition duration-150">
+                    Phase 3: Conflicts
+                </button>
+                <button onclick="switchCategory('phase4')" id="tab_phase4" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-300 transition duration-150">
+                    Phase 4: Advanced
+                </button>
+                <button onclick="switchCategory('phase5')" id="tab_phase5" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-300 transition duration-150">
+                    Phase 5: Open Source
+                </button>
+                <button onclick="switchCategory('phase6')" id="tab_phase6" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-300 transition duration-150">
+                    Phase 6: Automation
+                </button>
+            </div>
+
+            <!-- Commands Responsive Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="commandGrid">
+                
+                <!-- Command 1: git init -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase1">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 1: Basics</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Local</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git init</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Ek bilkul naya, empty local repository create karne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git init</code>
+                        <button onclick="copyCommand('git init')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 2: git config -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase1">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 1: Basics</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Config</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git config --global</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Aapka commit identity name aur developer email configure karne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-[10px] text-git-accent">git config --global user.name "Aditya"</code>
+                        <button onclick="copyCommand('git config --global user.name \&quot;Aditya\&quot;')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 3: git add -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase1">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 1: Basics</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Staging</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git add</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Files ko uncommitted local states se Staging Area me bhejne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git add .</code>
+                        <button onclick="copyCommand('git add .')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 4: git commit -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase1">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 1: Basics</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Local History</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git commit -m</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Staged changes ko unique custom message ke sath permanent save point dene ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-[11px] text-git-accent">git commit -m "Message"</code>
+                        <button onclick="copyCommand('git commit -m \&quot;Initial Commit\&quot;')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 5: git branch -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase2">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 2: Branching</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Parallel universe</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git branch</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Nayi branches banana aur existing local active branch list check karne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git branch feature-styles</code>
+                        <button onclick="copyCommand('git branch feature-styles')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 6: git switch -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase2">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 2: Branching</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Branch switch</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git switch</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Kisi doosri active branch ke code universe me shift karne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git switch feature-styles</code>
+                        <button onclick="copyCommand('git switch feature-styles')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 7: git merge -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase2">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 2: Branching</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Merge</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git merge</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Kisi specific feature branch ka finished code apni primary branch me merge karne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git merge feature-styles</code>
+                        <button onclick="copyCommand('git merge feature-styles')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 8: git fetch -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase3">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 3: Conflicts</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Remote Fetch</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git fetch</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Server se naya changes download karna local computer ke current code ko chhede bina.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git fetch upstream</code>
+                        <button onclick="copyCommand('git fetch upstream')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 9: git reset (Soft) -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase4">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 4: Advanced</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Soft rollback</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git reset --soft</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Committed history mita dena bina aapka physical files ka code delete kiye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git reset --soft HEAD~1</code>
+                        <button onclick="copyCommand('git reset --soft HEAD~1')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 10: git reset (Hard) -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase4">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 4: Advanced</span>
+                            <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-0.5 rounded border border-red-500/20 font-bold">Destructive</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight text-red-400">git reset --hard</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">WARNING! commits aur aapke machine se files ka code dono hamesha ke liye saaf karne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-red-400">git reset --hard &lt;commit_id&gt;</code>
+                        <button onclick="copyCommand('git reset --hard ')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 11: git stash -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase4">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 4: Advanced</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Code Locker</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git stash</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Incomplete/Half code ko safety se ek temporary locker space me chupane ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git stash</code>
+                        <button onclick="copyCommand('git stash')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 12: git stash pop -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase4">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 4: Advanced</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Locker pop</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git stash pop</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Locker box se aakhiri safe-keep code wapas nikal kar branch par paste karne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git stash pop</code>
+                        <button onclick="copyCommand('git stash pop')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 13: git cherry-pick -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase4">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 4: Advanced</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Pick single</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git cherry-pick</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Kisi doosri branch ka ek specific perfect commit copy karke apni active branch me milaana.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-xs text-git-accent">git cherry-pick &lt;id&gt;</code>
+                        <button onclick="copyCommand('git cherry-pick ')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 14: Fork / Remotes -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase5">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 5: Open Source</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">Fork sync</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">git remote add upstream</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Original project jahan se fork kiya tha use upstream remote nickname se add karne ke liye.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-[10px] text-git-accent">git remote add upstream &lt;URL&gt;</code>
+                        <button onclick="copyCommand('git remote add upstream ')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Command 15: GitHub Actions YAML -->
+                <div class="glass rounded-2xl p-5 flex flex-col justify-between space-y-4 command-card" data-phase="phase6">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono text-git-orange font-bold uppercase tracking-wider">Phase 6: Automation</span>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded border border-slate-700/80 text-slate-400 font-bold">CI/CD YAML</span>
+                        </div>
+                        <h5 class="text-base font-extrabold tracking-tight">GitHub Workflows CI</h5>
+                        <p class="text-slate-400 text-xs leading-relaxed">Automatic code integration pipelines set karne ke liye workflow folder design.</p>
+                    </div>
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <code class="font-mono text-[11px] text-git-accent">.github/workflows/ci.yml</code>
+                        <button onclick="copyCommand('.github/workflows/ci.yml')" class="text-slate-500 hover:text-white transition duration-150"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- No results visual feedback -->
+            <div id="noResults" class="hidden text-center py-12 glass rounded-2xl">
+                <i class="fa-solid fa-face-frown text-4xl text-slate-600 mb-3 animate-bounce"></i>
+                <h5 class="text-base font-bold text-slate-300">Aisa koi command nahi mila!</h5>
+                <p class="text-slate-500 text-xs mt-1">Check karein ki aapne spelling sahi type ki hai ya nahi.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Floating Toast Alerts System (Non-invasive custom notifications) -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Footer with Developer Notes -->
+    <footer class="mt-20 border-t border-slate-800/80 bg-slate-950/60 py-8 px-6 text-center">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+            <div class="flex items-center gap-1.5 justify-center">
+                <span>Created with</span>
+                <i class="fa-solid fa-heart text-git-orange animate-pulse"></i>
+                <span>for professional developers</span>
+            </div>
+            <p>&copy; 2026 GitMaster Pro Inc. Savi rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Vanilla Javascript Logic (Highly Cleaned and Structured) -->
+    <script>
+        // Custom interactive state of the simulator
+        let gitInited = false;
+        let fileStaged = false;
+        let fileCommitted = false;
+        let filePushed = false;
+
+        // Custom Ignore presets
+        const ignorePresets = {
+            node: `# Node.js & React ignores
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+.env
+.env.local
+build/
+dist/`,
+            python: `# Python Django/Flask ignores
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+db.sqlite3
+.env`,
+            unity: `# Unity Game engine ignores
+[Library]/
+[Temp]/
+[Obj]/
+[Build]/
+[Logs]/
+*.unityproj
+*.sln
+.vs/`
+        };
+
+        // Custom Toast Alert System (Avoids native alert blockages)
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            // Icon check based on status type
+            let icon = 'fa-check-circle text-git-green';
+            if (type === 'error') icon = 'fa-times-circle text-red-500';
+            if (type === 'info') icon = 'fa-info-circle text-git-accent';
+
+            toast.className = "flex items-center gap-3 bg-slate-900 border border-slate-800 text-slate-100 px-4 py-3 rounded-xl shadow-2xl pointer-events-auto transform translate-y-2 transition duration-300 ease-out opacity-0 border-l-4 " + 
+                            (type === 'success' ? 'border-l-git-green' : type === 'error' ? 'border-l-red-500' : 'border-l-git-accent');
+            
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-base"></i>
+                <span class="text-xs font-semibold font-mono">${message}</span>
+            `;
+
+            container.appendChild(toast);
+            
+            // Animate In
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-y-2');
+            }, 50);
+
+            // Animate Out & Remove
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Clipboard helper using standard execCommand to bypass restricted iFrame constraints
+        function copyTextToClipboard(text, successMessage) {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            showToast(successMessage, 'success');
+        }
+
+        // Action when copying commands from grid
+        function copyCommand(cmd) {
+            copyTextToClipboard(cmd, `Command copied: ${cmd}`);
+        }
+
+        // Action when copying gitignore code
+        function copyIgnoreText() {
+            const code = document.getElementById('ignoreResult').textContent;
+            if (code.startsWith('#')) {
+                copyTextToClipboard(code, ".gitignore config copied!");
+            } else {
+                showToast("Pehle koi template select karein!", "error");
+            }
+        }
+
+        // Toggle category tabs to filter cards
+        function switchCategory(cat) {
+            // Update Tab Active styles
+            const tabs = ['all', 'phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab_${t}`);
+                if (t === cat) {
+                    btn.className = "px-4 py-2 text-xs font-semibold rounded-lg bg-git-orange text-white border border-git-orange transition duration-150";
+                } else {
+                    btn.className = "px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-300 transition duration-150";
+                }
+            });
+
+            // Filter elements
+            const cards = document.querySelectorAll('.command-card');
+            let matched = 0;
+            cards.forEach(card => {
+                if (cat === 'all' || card.getAttribute('data-phase') === cat) {
+                    card.style.display = 'flex';
+                    matched++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const noResults = document.getElementById('noResults');
+            if (matched === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Filter commands via live search typing
+        function filterCommands() {
+            const input = document.getElementById('commandSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.command-card');
+            let matched = 0;
+
+            cards.forEach(card => {
+                const title = card.querySelector('h5').innerText.toLowerCase();
+                const desc = card.querySelector('p').innerText.toLowerCase();
+                const code = card.querySelector('code').innerText.toLowerCase();
+
+                if (title.includes(input) || desc.includes(input) || code.includes(input)) {
+                    card.style.display = 'flex';
+                    matched++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const noResults = document.getElementById('noResults');
+            if (matched === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // gitignore selector handler
+        function generateIgnore(tech) {
+            const element = document.getElementById('ignoreResult');
+            // update buttons state visual
+            ['Node', 'Python', 'Unity'].forEach(btnName => {
+                document.getElementById(`btn${btnName}`).classList.remove('ring-1', 'ring-git-orange', 'border-git-orange');
+            });
+
+            const capitalized = tech.charAt(0).toUpperCase() + tech.slice(1);
+            document.getElementById(`btn${capitalized}`).classList.add('ring-1', 'ring-git-orange', 'border-git-orange');
+
+            // Apply text template
+            element.textContent = ignorePresets[tech];
+            showToast(`${capitalized} template loaded!`, 'info');
+        }
+
+        // Interactive Simulator engine logic
+        function writeToTerminal(cmd, output, isError = false) {
+            const terminal = document.getElementById('terminalHistory');
+            
+            const cmdLine = document.createElement('div');
+            cmdLine.innerHTML = `<span class="text-git-green">aditya@dev-machine:~$</span> ${cmd}`;
+            
+            const outLine = document.createElement('div');
+            outLine.className = isError ? "text-red-400" : "text-slate-400";
+            outLine.textContent = output;
+
+            terminal.appendChild(cmdLine);
+            terminal.appendChild(outLine);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function executeSimCommand(cmd) {
+            const cleanCmd = cmd.trim();
+            const feedback = document.getElementById('simulatorFeedback');
+
+            // 1. command logic: git init
+            if (cleanCmd === 'git init') {
+                if (gitInited) {
+                    writeToTerminal('git init', 'Reinitialized existing Git repository in /users/aditya/project/.git/');
+                    return;
+                }
+                gitInited = true;
+                writeToTerminal('git init', 'Initialized empty Git repository in /users/aditya/project/.git/');
+                feedback.innerHTML = "Repo initialize ho gaya! Ab aapke project me do modified files (`index.html`, `style.css`) hain. Inhe stage par lane ke liye `git add .` chalayein.";
+                updateSimulatorUI();
+                return;
+            }
+
+            // check constraints for other commands
+            if (!gitInited) {
+                writeToTerminal(cleanCmd, 'fatal: not a git repository (or any of the parent directories): .git', true);
+                feedback.innerHTML = "Pehle `git init` command chalakar repository register karein!";
+                return;
+            }
+
+            // 2. command logic: git add
+            if (cleanCmd === 'git add .' || cleanCmd === 'git add') {
+                if (fileStaged) {
+                    writeToTerminal(cleanCmd, 'Nothing to add, working tree clean.');
+                    return;
+                }
+                fileStaged = true;
+                writeToTerminal(cleanCmd, 'Staged 2 files: index.html, style.css ready to commit.');
+                feedback.innerHTML = "Dono files safely Staging area me shift ho chuki hain! Ab inka snapshot freeze karne ke liye `git commit -m` chalayein.";
+                updateSimulatorUI();
+                return;
+            }
+
+            // 3. command logic: git commit
+            if (cleanCmd.startsWith('git commit')) {
+                if (!fileStaged) {
+                    writeToTerminal(cleanCmd, 'Nothing to commit, working tree clean (no files added to staging).', true);
+                    feedback.innerHTML = "Pehle files ko staging area me bhejein (`git add .`) uske baad hi commit possible hai!";
+                    return;
+                }
+                if (fileCommitted) {
+                    writeToTerminal(cleanCmd, 'On branch main. Nothing to commit, working tree clean.');
+                    return;
+                }
+                fileCommitted = true;
+                writeToTerminal(cleanCmd, '[main a3f9b2c] Commit success: Saved files to local history.');
+                feedback.innerHTML = "Congratulations! Commit complete ho gaya. Ab is saved project snapshot ko GitHub cloud par push karne ke liye `git push` chalayein.";
+                updateSimulatorUI();
+                return;
+            }
+
+            // 4. command logic: git push
+            if (cleanCmd === 'git push') {
+                if (!fileCommitted) {
+                    writeToTerminal(cleanCmd, 'Everything up-to-date (No commits made yet to push).', true);
+                    feedback.innerHTML = "Pehle commit banayein, tabhi toh push hoga cloud par!";
+                    return;
+                }
+                filePushed = true;
+                writeToTerminal('git push', 'Pushing code to branch main -> origin/main... Done! [OK]');
+                feedback.innerHTML = "🎉 BOOM! Aapka local code secure tarike se GitHub Cloud server par live save ho gaya hai! Mission Completed.";
+                updateSimulatorUI();
+                return;
+            }
+
+            // Unknown command fallback
+            writeToTerminal(cleanCmd, `bash: command not found: ${cleanCmd}`, true);
+        }
+
+        // Keyboard press event on virtual terminal
+        function handleTerminalCommand(e) {
+            if (e.key === 'Enter') {
+                const val = document.getElementById('terminalInput').value;
+                if (val.trim() !== '') {
+                    executeSimCommand(val);
+                    document.getElementById('terminalInput').value = '';
+                }
+            }
+        }
+
+        // Sync visual UI zones with the simulator states
+        function updateSimulatorUI() {
+            const wZone = document.getElementById('stageWorking');
+            const sZone = document.getElementById('stageStaging');
+            const lZone = document.getElementById('stageLocal');
+            const cZone = document.getElementById('stageCloud');
+
+            // clear layout contents
+            wZone.innerHTML = '';
+            sZone.innerHTML = '';
+            lZone.innerHTML = '';
+            cZone.innerHTML = '';
+
+            // 1. Files in Working stage
+            if (!fileStaged) {
+                wZone.innerHTML = `
+                    <div class="bg-red-500/10 border border-red-500/20 text-red-400 px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1 mb-1 animate-pulse">
+                        <i class="fa-solid fa-file-code"></i> index.html
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/20 text-red-400 px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1">
+                        <i class="fa-solid fa-file-code"></i> style.css
+                    </div>
+                `;
+            } else if (fileStaged && !fileCommitted) {
+                // files in staging area
+                sZone.innerHTML = `
+                    <div class="bg-git-green/10 border border-git-green/20 text-git-green px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1 mb-1 animate-bounce">
+                        <i class="fa-solid fa-file-shield"></i> index.html
+                    </div>
+                    <div class="bg-git-green/10 border border-git-green/20 text-git-green px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1">
+                        <i class="fa-solid fa-file-shield"></i> style.css
+                    </div>
+                `;
+            } else if (fileCommitted && !filePushed) {
+                // commit created successfully
+                lZone.innerHTML = `
+                    <div class="bg-git-accent/10 border border-git-accent/20 text-git-accent px-2.5 py-1.5 rounded-lg text-[10px] font-mono flex flex-col items-center">
+                        <i class="fa-solid fa-box-archive text-sm mb-1"></i>
+                        <span class="font-bold">Commit: a3f9b2c</span>
+                    </div>
+                `;
+            } else if (filePushed) {
+                // cloud pushed complete state
+                cZone.innerHTML = `
+                    <div class="bg-git-orange/10 border border-git-orange/20 text-git-orange px-2 py-1.5 rounded-lg text-[10px] font-mono flex flex-col items-center animate-pulse">
+                        <i class="fa-brands fa-github text-base mb-1 text-git-orange"></i>
+                        <span>Main repo OK</span>
+                    </div>
+                `;
+            }
+        }
+
+        // Reset Simulator
+        function resetSimulator() {
+            gitInited = false;
+            fileStaged = false;
+            fileCommitted = false;
+            filePushed = false;
+
+            const terminal = document.getElementById('terminalHistory');
+            terminal.innerHTML = `
+                <div class="text-slate-500"># Reset board complete. Ready to restart.</div>
+                <div class="text-slate-400"><span class="text-git-green">aditya@dev-machine:~$</span> _</div>
+            `;
+            document.getElementById('simulatorFeedback').innerHTML = "Aapki files abhi local working directory me unsaved hain. `git init` command chalakar repository setup karein.";
+            updateSimulatorUI();
+            showToast("Simulator board has been reset!", "info");
+        }
+
+        // Merge Conflict Visualizer Logic
+        function triggerConflictSimulation() {
+            const viewer = document.getElementById('conflictViewer');
+            const helpText = document.getElementById('conflictHelpText');
+            
+            // Activate resolve actions buttons
+            document.getElementById('btnAcceptCurrent').disabled = false;
+            document.getElementById('btnAcceptCurrent').className = "px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition duration-150 text-git-orange";
+            
+            document.getElementById('btnAcceptIncoming').disabled = false;
+            document.getElementById('btnAcceptIncoming').className = "px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition duration-150 text-git-accent";
+            
+            document.getElementById('btnAcceptBoth').disabled = false;
+            document.getElementById('btnAcceptBoth').className = "px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition duration-150 text-git-green";
+
+            // Inject mock conflict text visually
+            viewer.innerHTML = `
+<div class="text-red-500 font-bold">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD (Branch-A: Your Code)</div>
+<div class="bg-red-500/10 text-red-300 px-2 py-0.5 rounded">const developer = "Aditya Kumar";</div>
+<div class="text-slate-500">=======</div>
+<div class="bg-blue-500/10 text-blue-300 px-2 py-0.5 rounded">const developer = "Devops Bot Team";</div>
+<div class="text-blue-500 font-bold">&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch (Branch-B)</div>
+            `;
+            helpText.textContent = "Boom! Conflict detected! Accept buttons ka use karke conflict resolve karein aur final syntax generate karein.";
+            showToast("Merge conflict triggered!", "error");
+        }
+
+        function resolveConflict(choice) {
+            const viewer = document.getElementById('conflictViewer');
+            const helpText = document.getElementById('conflictHelpText');
+
+            if (choice === 'current') {
+                viewer.innerHTML = `<div class="bg-git-orange/10 border border-git-orange/30 text-slate-200 px-3 py-2 rounded-xl font-mono"><span class="text-git-orange font-bold">// Conflict resolved (Keep Branch A)</span><br>const developer = "Aditya Kumar";</div>`;
+                showToast("Conflict resolved: Branch A accepted!", "success");
+            } else if (choice === 'incoming') {
+                viewer.innerHTML = `<div class="bg-git-accent/10 border border-git-accent/30 text-slate-200 px-3 py-2 rounded-xl font-mono"><span class="text-git-accent font-bold">// Conflict resolved (Keep Branch B)</span><br>const developer = "Devops Bot Team";</div>`;
+                showToast("Conflict resolved: Branch B accepted!", "success");
+            } else if (choice === 'both') {
+                viewer.innerHTML = `
+<div class="bg-git-green/10 border border-git-green/30 text-slate-200 px-3 py-2 rounded-xl font-mono">
+<span class="text-git-green font-bold">// Conflict resolved (Kept both branches)</span><br>
+const developerA = "Aditya Kumar";<br>
+const developerB = "Devops Bot Team";
+</div>`;
+                showToast("Conflict resolved: Both changes kept!", "success");
+            }
+
+            // Disable resolve buttons back
+            ['btnAcceptCurrent', 'btnAcceptIncoming', 'btnAcceptBoth'].forEach(id => {
+                const btn = document.getElementById(id);
+                btn.disabled = true;
+                btn.className = "px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition duration-150 text-slate-400 cursor-not-allowed";
+            });
+            helpText.textContent = "Conflict successfully resolved! File is clean and ready to compile.";
+        }
+
+        // Initialize Simulator UI
+        window.onload = function() {
+            updateSimulatorUI();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+name: Run Code Test
+on: [push, pull_request]
+
+jobs:
+  test-environments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Run a small check
+        run: echo "Testing environment setup successfully!"

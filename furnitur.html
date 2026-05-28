@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viraasat - Premium Modern Furniture</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#C5A880',
+                            goldhover: '#B0936B',
+                            dark: '#0F0F10',
+                            card: '#18181B',
+                            accent: '#F9F6F0'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP for Smooth Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D Canvas Customizer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0F0F10;
+            color: #F9F6F0;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F0F10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C5A880;
+            border-radius: 4px;
+        }
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(24, 24, 27, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Neon/Golden soft glow */
+        .glow-gold {
+            box-shadow: 0 0 25px rgba(197, 168, 128, 0.15);
+        }
+    </style>
+</head>
+<body class="selection:bg-brand-gold selection:text-brand-dark">
+
+    <!-- TOP ANNOUNCEMENT BANNER -->
+    <div class="bg-brand-gold text-brand-dark text-xs font-semibold py-2 px-4 text-center tracking-wider">
+        ✨ EK NAYA SAVERA: Naye Premium Collections par 15% ki Chhut. Use Code: <span class="underline">VIRAASAT15</span>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 glass transition-all duration-300 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-2 group">
+                <span class="text-2xl md:text-3xl font-serif font-black tracking-widest text-brand-gold transition-colors group-hover:text-white">
+                    VIRAASAT
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-gold group-hover:bg-white transition-all"></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                <a href="#hero" class="text-brand-gold hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[2px] after:bg-brand-gold">Home</a>
+                <a href="#three-customizer" class="text-gray-300 hover:text-brand-gold transition-colors">3D Customizer</a>
+                <a href="#room-planner" class="text-gray-300 hover:text-brand-gold transition-colors">Room Studio</a>
+                <a href="#collection" class="text-gray-300 hover:text-brand-gold transition-colors">Collections</a>
+                <a href="#features" class="text-gray-300 hover:text-brand-gold transition-colors">Kyun Chunein Us</a>
+            </nav>
+
+            <!-- Quick Action Icons -->
+            <div class="flex items-center space-x-6">
+                <!-- Shopping Cart Trigger -->
+                <button onclick="toggleCart()" class="relative text-gray-300 hover:text-brand-gold transition-colors focus:outline-none">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-brand-gold text-brand-dark text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+                
+                <!-- Expert Consult button -->
+                <a href="#consultation" class="hidden lg:inline-flex items-center space-x-2 bg-brand-gold hover:bg-brand-goldhover text-brand-dark font-semibold text-xs px-5 py-3 rounded-full tracking-wider uppercase transition-all duration-300 transform hover:-translate-y-0.5">
+                    <span>Free Advice Lejein</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/5 absolute top-20 left-0 w-full p-6 space-y-4 shadow-xl">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block text-brand-gold font-medium py-2">Home</a>
+            <a href="#three-customizer" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-brand-gold py-2 transition-colors">3D Customizer</a>
+            <a href="#room-planner" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-brand-gold py-2 transition-colors">Room Studio</a>
+            <a href="#collection" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-brand-gold py-2 transition-colors">Collections</a>
+            <a href="#features" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-brand-gold py-2 transition-colors">Kyun Chunein Us</a>
+            <a href="#consultation" onclick="toggleMobileMenu()" class="block bg-brand-gold text-brand-dark text-center font-bold py-3 rounded-lg tracking-wider uppercase transition-all">
+                Free Advice Lejein
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION with parallax & dual-action split layout -->
+    <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-12 px-6">
+        <!-- Floating abstract light circles for luxury look -->
+        <div class="absolute top-1/4 left-10 w-96 h-96 rounded-full bg-brand-gold/5 blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-10 w-[450px] h-[450px] rounded-full bg-yellow-600/5 blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <!-- Left Info Column -->
+            <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                <span class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full text-xs text-brand-gold font-semibold tracking-widest uppercase">
+                    <i class="fa-solid fa-crown text-[10px]"></i>
+                    <span>Sadiyon Se Behtar Luxury Craftsmanship</span>
+                </span>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-semibold leading-tight text-white">
+                    Aapke Sapno Ka Ghar, <br>
+                    <span class="text-brand-gold italic">Ab Haqeeqat Mein.</span>
+                </h1>
+                
+                <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    Modern design aur bemisaal quality ka bemisaal sangam. Har ek lakdi aur kapde ki silai me chhupi hai shahi virasat aur naye zamane ka ehsaas.
+                </p>
+
+                <!-- Responsive Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#collection" class="w-full sm:w-auto text-center px-8 py-4 bg-brand-gold hover:bg-brand-goldhover text-brand-dark font-bold rounded-full tracking-wider uppercase shadow-lg shadow-brand-gold/10 transition-all duration-300 transform hover:-translate-y-1">
+                        Abhi Explore Karein
+                    </a>
+                    <a href="#three-customizer" class="w-full sm:w-auto text-center px-8 py-4 bg-transparent hover:bg-white/5 border border-white/20 hover:border-brand-gold text-white font-semibold rounded-full tracking-wider uppercase transition-all duration-300">
+                        <i class="fa-solid fa-cube mr-2"></i> 3D Customizer
+                    </a>
+                </div>
+
+                <!-- Live stats -->
+                <div class="grid grid-cols-3 gap-6 pt-10 border-t border-white/10 max-w-md mx-auto lg:mx-0">
+                    <div>
+                        <h4 class="text-2xl md:text-3xl font-serif font-bold text-brand-gold">10k+</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Khush Ghar</p>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl md:text-3xl font-serif font-bold text-brand-gold">150+</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Exquisite Designs</p>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl md:text-3xl font-serif font-bold text-brand-gold">100%</h4>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Premium Teak Wood</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Splitted Hero Image with subtle 3D parallax frame -->
+            <div class="lg:col-span-6 relative flex justify-center">
+                <div class="relative w-full max-w-[480px] aspect-[4/5] rounded-2xl overflow-hidden group border border-white/10 glow-gold transition-transform duration-500 hover:scale-[1.02]">
+                    <!-- Premium Background Accent Image -->
+                    <img id="hero-img" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=1000" 
+                         alt="Premium Sofa Living Room" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                         onerror="this.src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=1000'">
+                    
+                    <!-- Glass badge overlaid in 3D frame style -->
+                    <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass border border-white/10 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-brand-gold uppercase tracking-widest font-semibold">Is hafte ka sabsé pasandida</p>
+                            <h4 class="text-lg font-serif font-bold text-white mt-1">Regal Velvet Lounge Sofa</h4>
+                        </div>
+                        <div class="bg-brand-gold text-brand-dark p-2.5 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating decor pill -->
+                <div class="absolute -top-6 -right-6 hidden sm:flex items-center space-x-3 p-4 rounded-xl glass border border-white/10 glow-gold animate-bounce" style="animation-duration: 4s;">
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping"></span>
+                    <span class="text-xs font-semibold text-gray-200">Exclusive 5-Yr Warranty</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE 3D CUSTOMIZER (THREE.JS INSIDE CANVAS) -->
+    <section id="three-customizer" class="py-20 px-6 bg-black/40 relative border-t border-b border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-3">Live Interactive experience</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Apna Premium Custom Chair Banayein</h2>
+                <p class="text-gray-400 mt-4">
+                    Neeche diye gaye 3D canvas ko drag karein aur alag-alag royal colors select karke chair ka look dekhhein. Ham is chair ko bilkul aapki pasand ke mutabik design karenge.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <!-- ThreeJS Canvas Area (Left) -->
+                <div class="lg:col-span-8 relative">
+                    <!-- Instruction Overlay -->
+                    <div class="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md border border-white/10 py-1.5 px-3 rounded-full text-[11px] text-gray-300 flex items-center space-x-2">
+                        <i class="fa-solid fa-arrows-spin text-brand-gold animate-spin"></i>
+                        <span>Mouse ya Touch se drag karke ghumayein</span>
+                    </div>
+
+                    <div class="w-full aspect-video md:aspect-[16/10] bg-zinc-950 rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative">
+                        <canvas id="three-canvas" class="w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
+                        
+                        <!-- 3D Preloader -->
+                        <div id="three-loader" class="absolute inset-0 bg-zinc-950 flex flex-col items-center justify-center space-y-4">
+                            <div class="w-12 h-12 border-4 border-brand-gold border-t-transparent rounded-full animate-spin"></div>
+                            <p class="text-xs text-brand-gold uppercase tracking-wider font-semibold">3D Environment Build Ho Raha Hai...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control Panels (Right) -->
+                <div class="lg:col-span-4 glass p-8 rounded-2xl border border-white/10 space-y-8">
+                    <div>
+                        <span class="text-xs text-brand-gold font-bold uppercase tracking-widest block mb-2">Exclusive Model</span>
+                        <h3 class="text-2xl font-serif font-semibold text-white">The Royal Duke Club Chair</h3>
+                        <p class="text-gray-400 text-xs mt-2">Fine high-density cushion, ergonomic wood framework aur exquisite brass coated legs ka adbhut mishran.</p>
+                    </div>
+
+                    <!-- Material and Fabric selection -->
+                    <div class="space-y-4">
+                        <label class="text-xs uppercase tracking-widest text-brand-gold font-bold">1. Velvet Fabric Rang Chunein</label>
+                        <div class="grid grid-cols-4 gap-3">
+                            <button onclick="changeChairColor('#1E3E50', 'Velvet Teal')" class="color-btn group relative flex flex-col items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-brand-gold transition-all">
+                                <span class="w-7 h-7 rounded-full bg-[#1E3E50] border border-white/20 mb-1 block shadow-inner"></span>
+                                <span class="text-[9px] text-gray-300">Teal</span>
+                            </button>
+                            <button onclick="changeChairColor('#114A2E', 'Royal Emerald')" class="color-btn group relative flex flex-col items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-brand-gold transition-all">
+                                <span class="w-7 h-7 rounded-full bg-[#114A2E] border border-white/20 mb-1 block shadow-inner"></span>
+                                <span class="text-[9px] text-gray-300">Emerald</span>
+                            </button>
+                            <button onclick="changeChairColor('#90302E', 'Classic Ruby')" class="color-btn group relative flex flex-col items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-brand-gold transition-all">
+                                <span class="w-7 h-7 rounded-full bg-[#90302E] border border-white/20 mb-1 block shadow-inner"></span>
+                                <span class="text-[9px] text-gray-300">Ruby</span>
+                            </button>
+                            <button onclick="changeChairColor('#E0B354', 'Royal Gold')" class="color-btn group relative flex flex-col items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-brand-gold transition-all">
+                                <span class="w-7 h-7 rounded-full bg-[#E0B354] border border-white/20 mb-1 block shadow-inner"></span>
+                                <span class="text-[9px] text-gray-300">Gold</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Wood finish selection -->
+                    <div class="space-y-4">
+                        <label class="text-xs uppercase tracking-widest text-brand-gold font-bold">2. Wood Base Finish</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="changeWoodFinish('dark-walnut')" class="wood-btn py-3 px-4 rounded-xl bg-white/5 border border-brand-gold text-white text-xs font-semibold hover:border-brand-gold transition-all">
+                                Mahogany Dark Walnut
+                            </button>
+                            <button onclick="changeWoodFinish('honey-teak')" class="wood-btn py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold hover:border-brand-gold transition-all">
+                                Premium Honey Teak
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Summary Price Tag -->
+                    <div class="pt-6 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400">Chuna Gaya Color: <strong id="selected-fabric-name" class="text-brand-gold">Velvet Teal</strong></span>
+                            <div class="text-2xl font-serif font-bold text-white mt-1">₹34,999/-</div>
+                        </div>
+                        <button onclick="addToCart('Royal Duke Club Chair', 34999, 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80&w=300')" class="px-6 py-3 bg-brand-gold hover:bg-brand-goldhover text-brand-dark font-bold text-xs uppercase tracking-wider rounded-lg transition-all transform active:scale-95">
+                            <i class="fa-solid fa-cart-plus mr-1"></i> Cart Mein Dalein
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE ROOM STYLEPLANNER STUDIO -->
+    <section id="room-planner" class="py-20 px-6 relative">
+        <div class="absolute inset-0 bg-cover bg-center opacity-5 pointer-events-none" style="background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000');"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Info & Control Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block">Interactive Studio</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold leading-tight">Apna Perfect Room <br><span class="italic text-brand-gold">Theme Chunyein</span></h2>
+                    <p class="text-gray-400">
+                        Humaare expert interior decorators ne 4 vishesh themes banayi hain. Niche diye gaye themes ko select kijiye aur live photo preview dekhiye ki aapka ghar kaisa dikh sakta hai.
+                    </p>
+
+                    <!-- Theme Toggles -->
+                    <div class="space-y-3 pt-4">
+                        <button onclick="switchRoomTheme('scandi')" class="theme-btn w-full flex items-center justify-between p-4 rounded-xl glass border border-brand-gold transition-all text-left">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-gray-600 flex items-center justify-center text-white"><i class="fa-solid fa-leaf"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Minimalist Scandinavian</h4>
+                                    <p class="text-xs text-gray-400 mt-0.5">Sada, Khula aur Prakritik Prakash se bharpoor.</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-brand-gold"></i>
+                        </button>
+
+                        <button onclick="switchRoomTheme('bohemian')" class="theme-btn w-full flex items-center justify-between p-4 rounded-xl glass border border-white/5 hover:border-brand-gold transition-all text-left">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-amber-800 flex items-center justify-center text-white"><i class="fa-solid fa-palette"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-200 text-sm">Warm Bohemian Glow</h4>
+                                    <p class="text-xs text-gray-400 mt-0.5">Kalatmak, Rang-biranga aur Shanti ka anubhav.</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                        </button>
+
+                        <button onclick="switchRoomTheme('luxury')" class="theme-btn w-full flex items-center justify-between p-4 rounded-xl glass border border-white/5 hover:border-brand-gold transition-all text-left">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-yellow-600 flex items-center justify-center text-white"><i class="fa-solid fa-gem"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-200 text-sm">Royal Luxury Lounge</h4>
+                                    <p class="text-xs text-gray-400 mt-0.5">Gold elements, Gahra velvet aur adbhut lakdi.</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right High-Resolution Dynamic Image Preview -->
+                <div class="lg:col-span-7">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 glow-gold aspect-[16/10]">
+                        <img id="planner-preview-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1200" 
+                             alt="Interior Style View" 
+                             class="w-full h-full object-cover transition-all duration-700 ease-in-out scale-100"
+                             onerror="this.src='https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200'">
+                        
+                        <!-- Floating designer tag -->
+                        <div class="absolute top-4 right-4 bg-brand-dark/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[10px] uppercase tracking-wider text-brand-gold font-bold">
+                            Featured Style Showcase
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: FEATURED PRODUCTS / CURATED COLLECTIONS -->
+    <section id="collection" class="py-20 px-6 bg-zinc-950/60 relative">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-3">Har Ek Khas Kamre Ke Liye</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-white">Hamari Shandaar Collections</h2>
+                </div>
+                <!-- Filtering tabs -->
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="filterProducts('all')" class="filter-tab px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-gold text-brand-dark transition-all">SABHI</button>
+                    <button onclick="filterProducts('living')" class="filter-tab px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 text-gray-400 hover:text-white transition-all">LIVING ROOM</button>
+                    <button onclick="filterProducts('bedroom')" class="filter-tab px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 text-gray-400 hover:text-white transition-all">BEDROOM</button>
+                    <button onclick="filterProducts('dining')" class="filter-tab px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 text-gray-400 hover:text-white transition-all">DINING</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="product-grid">
+                
+                <!-- Product Card 1 -->
+                <div class="product-card group bg-brand-card rounded-2xl overflow-hidden border border-white/5 hover:border-brand-gold/30 transition-all duration-500 flex flex-col justify-between" data-category="living">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=600" 
+                             alt="Aesthetic Lounge Chair" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <span class="absolute top-4 left-4 bg-brand-gold text-brand-dark text-[10px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full">Best Seller</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h4 class="text-sm text-gray-400 uppercase tracking-widest">Living Room</h4>
+                            <h3 class="text-xl font-serif font-semibold text-white mt-1">Aura Oakwood Armchair</h3>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-brand-gold">₹19,499</span>
+                            <button onclick="addToCart('Aura Oakwood Armchair', 19499, 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=300')" class="p-3 bg-white/5 hover:bg-brand-gold text-white hover:text-brand-dark rounded-full transition-colors">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card group bg-brand-card rounded-2xl overflow-hidden border border-white/5 hover:border-brand-gold/30 transition-all duration-500 flex flex-col justify-between" data-category="bedroom">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=600" 
+                             alt="Luxury Oakwood Bed" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h4 class="text-sm text-gray-400 uppercase tracking-widest">Bedroom</h4>
+                            <h3 class="text-xl font-serif font-semibold text-white mt-1">Shahi Teakwood King Bed</h3>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-brand-gold">₹84,999</span>
+                            <button onclick="addToCart('Shahi Teakwood King Bed', 84999, 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=300')" class="p-3 bg-white/5 hover:bg-brand-gold text-white hover:text-brand-dark rounded-full transition-colors">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card group bg-brand-card rounded-2xl overflow-hidden border border-white/5 hover:border-brand-gold/30 transition-all duration-500 flex flex-col justify-between" data-category="dining">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&q=80&w=600" 
+                             alt="Marble Dining Table" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <span class="absolute top-4 left-4 bg-amber-700 text-white text-[10px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full">Premium Wood</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h4 class="text-sm text-gray-400 uppercase tracking-widest">Dining</h4>
+                            <h3 class="text-xl font-serif font-semibold text-white mt-1">Marble top 6-Seater Table</h3>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-brand-gold">₹62,499</span>
+                            <button onclick="addToCart('Marble top 6-Seater Table', 62499, 'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&q=80&w=300')" class="p-3 bg-white/5 hover:bg-brand-gold text-white hover:text-brand-dark rounded-full transition-colors">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="product-card group bg-brand-card rounded-2xl overflow-hidden border border-white/5 hover:border-brand-gold/30 transition-all duration-500 flex flex-col justify-between" data-category="living">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?auto=format&fit=crop&q=80&w=600" 
+                             alt="Elegant Modern Couch" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h4 class="text-sm text-gray-400 uppercase tracking-widest">Living Room</h4>
+                            <h3 class="text-xl font-serif font-semibold text-white mt-1">Luxurious Cloud Sofa</h3>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-brand-gold">₹98,999</span>
+                            <button onclick="addToCart('Luxurious Cloud Sofa', 98999, 'https://images.unsplash.com/photo-1581428982868-e410dd047a90?auto=format&fit=crop&q=80&w=300')" class="p-3 bg-white/5 hover:bg-brand-gold text-white hover:text-brand-dark rounded-full transition-colors">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: WHY CHOOSE US (FEATURES WITH PREMIUM METRICS) -->
+    <section id="features" class="py-20 px-6 bg-zinc-900/40 relative border-t border-b border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-3">Har Ek Kadam Par Bharosa</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Kyun Viraasat Hai Sabse Alag?</h2>
+                <p class="text-gray-400 mt-4">Humaara furniture sirf aakarshak nahi, balki mazbooti aur modern lifestyle ke anusaar banaya jata hai.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="glass p-8 rounded-2xl border border-white/5 hover:border-brand-gold/20 transition-all duration-300">
+                    <div class="w-14 h-14 bg-brand-gold/10 rounded-xl flex items-center justify-center text-brand-gold text-2xl mb-6">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-white mb-3">Genuine Teakwood & Timber</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Hum chuninda saal ke sagwan aur shisham ki asli lakdi ka upyog karte hain. Deemak (termite) aur weather proofing treatment ke sath.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass p-8 rounded-2xl border border-white/5 hover:border-brand-gold/20 transition-all duration-300">
+                    <div class="w-14 h-14 bg-brand-gold/10 rounded-xl flex items-center justify-center text-brand-gold text-2xl mb-6">
+                        <i class="fa-solid fa-truck-ramp-box"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-white mb-3">Muft Delivery Aur Set Up</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Aap bas order karein, ghar tak pahuchana aur bina kisi asuvidha ke use fitting karke dena humari expert team ka kaam hai. Bilkul free!
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass p-8 rounded-2xl border border-white/5 hover:border-brand-gold/20 transition-all duration-300">
+                    <div class="w-14 h-14 bg-brand-gold/10 rounded-xl flex items-center justify-center text-brand-gold text-2xl mb-6">
+                        <i class="fa-solid fa-couch"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-white mb-3">Customize-On-Demand</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Kya aapko alag size ya fabric color chahiye? Hamare skilled artisans aapke room ki dimensions ke hisab se exact furniture tailor karenge.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: EXPERT CONSULTATION & APPOINTMENT BOOKING -->
+    <section id="consultation" class="py-20 px-6 relative overflow-hidden">
+        <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-brand-gold/10 blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto glass rounded-3xl p-8 md:p-12 border border-white/10 glow-gold relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left text -->
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block">Home Consultation</span>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white">Hamare Expert Designer Se Baat Karein</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Samajh nahi aa raha kaun sa furniture best rahega? Form bharein aur hamare expert designer ke sath ek free visual call book karein.
+                    </p>
+                    <div class="space-y-2 pt-2 text-xs text-gray-300">
+                        <p><i class="fa-solid fa-check text-brand-gold mr-2"></i> Free Digital Design Blueprint</p>
+                        <p><i class="fa-solid fa-check text-brand-gold mr-2"></i> Custom Fabric Samples Courier</p>
+                    </div>
+                </div>
+
+                <!-- Right Form with live confirmation modal -->
+                <div class="lg:col-span-7">
+                    <form onsubmit="handleConsultationForm(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-gray-400 mb-1.5 font-medium">Full Name</label>
+                                <input type="text" id="consult-name" required placeholder="Aapka Naam" class="w-full bg-white/5 border border-white/15 focus:border-brand-gold focus:outline-none rounded-xl px-4 py-3 text-sm text-white transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-gray-400 mb-1.5 font-medium">Phone Number</label>
+                                <input type="tel" id="consult-phone" required placeholder="Mobile Number" class="w-full bg-white/5 border border-white/15 focus:border-brand-gold focus:outline-none rounded-xl px-4 py-3 text-sm text-white transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-1.5 font-medium">Chunein Room Type</label>
+                            <select id="consult-room" class="w-full bg-zinc-900 border border-white/15 focus:border-brand-gold focus:outline-none rounded-xl px-4 py-3 text-sm text-gray-300 transition-colors">
+                                <option>Living Room Makeover</option>
+                                <option>Premium Bedroom Design</option>
+                                <option>Modern Dining / Kitchen Setup</option>
+                                <option>Complete Home Consultation</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-1.5 font-medium">Bataein Aapki Kya Zaroorat Hai (Optional)</label>
+                            <textarea id="consult-message" rows="3" placeholder="Jaise: 'Mujhe ek 5 seater wooden sofa custom build karwana hai...'" class="w-full bg-white/5 border border-white/15 focus:border-brand-gold focus:outline-none rounded-xl px-4 py-3 text-sm text-white transition-colors"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-brand-gold hover:bg-brand-goldhover text-brand-dark font-bold text-xs uppercase tracking-wider rounded-xl transition-all transform active:scale-[0.99] shadow-lg shadow-brand-gold/10">
+                            Book Free Appointment
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SLIDER SECTION -->
+    <section class="py-20 px-6 bg-black/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-3">Ghar Ghar Ki Khushi</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Humare Khush Grahak</h2>
+            </div>
+
+            <!-- Grid containing premium text cards with rating stars -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-brand-gold space-x-1 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">
+                            "Maine Viraasat se dining table aur lounge chairs custom banwayi thi. Inka mahogany finish aur velvet comfort bilkul next level hai. Delivery bhi bahut sahi time par hui!"
+                        </p>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center font-bold text-brand-gold text-sm">R</div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Rajesh Malhotra</h4>
+                            <p class="text-xs text-gray-500">Delhi, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-brand-gold space-x-1 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">
+                            "3D customizer online dekh kar thoda darr tha ki real me kaisa dikhega, par jab couch deliver hua toh bilkul unhi colors me aur fit aaya. Five Stars is craftsmanship ko!"
+                        </p>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center font-bold text-brand-gold text-sm">S</div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Sneha Sharma</h4>
+                            <p class="text-xs text-gray-500">Mumbai, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-brand-gold space-x-1 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">
+                            "Bina kisi pareshaani ke hamare living room ke liye expert designer ne call par color choice suggest ki. Customer service se lekar installation tak sab top notch tha."
+                        </p>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center font-bold text-brand-gold text-sm">A</div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Aman Verma</h4>
+                            <p class="text-xs text-gray-500">Bangalore, India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOPPING CART SLIDE-OVER SIDEBAR -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-zinc-950 border-l border-white/10 shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300">
+        <!-- Cart Top header -->
+        <div>
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-bag-shopping text-brand-gold text-lg"></i>
+                    <h3 class="text-lg font-serif font-bold text-white">Aapki Bag (<span id="cart-count">0</span>)</h3>
+                </div>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items listing scrollbox -->
+            <div id="cart-items" class="space-y-4 overflow-y-auto max-h-[60vh] pr-2">
+                <!-- Empty state shown by default -->
+                <div class="text-center py-12 text-gray-500" id="empty-cart-msg">
+                    <i class="fa-solid fa-couch text-4xl mb-3 text-white/10"></i>
+                    <p class="text-sm">Aapka cart khali hai. Kuch dilchasp products add kijiye!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart pricing details / Checkout button -->
+        <div class="border-t border-white/10 pt-6 space-y-4">
+            <div class="flex items-center justify-between text-sm text-gray-400">
+                <span>Shipping & Delivery</span>
+                <span class="text-green-500">Free/Muft</span>
+            </div>
+            <div class="flex items-center justify-between text-base font-bold text-white">
+                <span>Kul Milakar Keemat</span>
+                <span id="cart-total" class="text-brand-gold">₹0</span>
+            </div>
+            <button onclick="triggerCheckout()" class="w-full py-4 bg-brand-gold hover:bg-brand-goldhover text-brand-dark font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg active:scale-[0.99]">
+                Checkout / Order Karein
+            </button>
+        </div>
+    </div>
+
+    <!-- CUSTOM INTERACTIVE DIALOG MODAL (INSTEAD OF ALERT) -->
+    <div id="custom-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
+        <div class="bg-brand-card border border-brand-gold max-w-md w-full p-8 rounded-2xl text-center space-y-6 shadow-2xl relative glow-gold">
+            <div class="w-16 h-16 bg-brand-gold/10 text-brand-gold rounded-full flex items-center justify-center text-3xl mx-auto">
+                <i id="modal-icon" class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 id="modal-title" class="text-2xl font-serif font-bold text-white">Badhai Ho!</h3>
+                <p id="modal-desc" class="text-sm text-gray-400">Aapka appointment book ho gaya hai.</p>
+            </div>
+            <button onclick="closeModal()" class="w-full py-3 bg-brand-gold hover:bg-brand-goldhover text-brand-dark font-bold text-xs uppercase tracking-wider rounded-xl transition-all">
+                Theek Hai
+            </button>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION POPUP (Toast for Cart Addition) -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass border border-brand-gold p-4 rounded-xl flex items-center space-x-3 shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300">
+        <div class="w-8 h-8 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <h5 class="text-xs font-bold text-white">Product Added!</h5>
+            <p class="text-[11px] text-gray-400">Cart me safaltapoorvak add ho gaya hai.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-zinc-950 border-t border-white/5 py-16 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+            
+            <!-- Branding & intro -->
+            <div class="space-y-4">
+                <span class="text-2xl font-serif font-black tracking-widest text-brand-gold">VIRAASAT</span>
+                <p class="text-xs text-gray-400 leading-relaxed">
+                    Sadiyon ka shahi dharohar ab naye zamane ke layouts ke sath. Premium comfort aur top interior products ke liye aapka sabse bharosemand brand.
+                </p>
+                <div class="flex space-x-4 pt-2 text-gray-400">
+                    <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+                    <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
+                    <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-pinterest text-lg"></i></a>
+                </div>
+            </div>
+
+            <!-- Fast links -->
+            <div>
+                <h4 class="text-xs uppercase tracking-wider text-brand-gold font-bold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-xs text-gray-400">
+                    <li><a href="#hero" class="hover:text-white transition-colors">Home</a></li>
+                    <li><a href="#three-customizer" class="hover:text-white transition-colors">3D Customizer</a></li>
+                    <li><a href="#room-planner" class="hover:text-white transition-colors">Room Studio</a></li>
+                    <li><a href="#collection" class="hover:text-white transition-colors">Products Showcase</a></li>
+                </ul>
+            </div>
+
+            <!-- Support / Trust -->
+            <div>
+                <h4 class="text-xs uppercase tracking-wider text-brand-gold font-bold mb-4">Help & Info</h4>
+                <ul class="space-y-2 text-xs text-gray-400">
+                    <li><a href="#" class="hover:text-white transition-colors">Shipping & Delivery Policies</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Warranty & Claim Forms</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Custom Manufacturing Terms</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Contact Support</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="space-y-4">
+                <h4 class="text-xs uppercase tracking-wider text-brand-gold font-bold">Newsletter Signup</h4>
+                <p class="text-xs text-gray-400">Naye premium drops aur design tips pane ke liye subscribe karein.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Aapka Email" class="w-full bg-white/5 border border-white/10 rounded-l-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold">
+                    <button onclick="subscribeNewsletter()" class="bg-brand-gold hover:bg-brand-goldhover text-brand-dark px-4 py-2 text-xs font-bold uppercase rounded-r-lg">Join</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 text-center text-[10px] text-gray-500">
+            <p>© 2026 Viraasat Premium Furnitures. All rights reserved. Made for luxury home aesthetics.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT ENGINE -->
+    <script>
+        // JS State management
+        let cart = [];
+        let currentFabricColor = '#1E3E50'; 
+        let currentWoodFinish = 'dark-walnut';
+
+        // Custom modal helper
+        function showCustomModal(title, description, isSuccess = true) {
+            const modal = document.getElementById('custom-modal');
+            const icon = document.getElementById('modal-icon');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDesc = document.getElementById('modal-desc');
+
+            modalTitle.innerText = title;
+            modalDesc.innerText = description;
+            
+            if(isSuccess) {
+                icon.className = "fa-solid fa-circle-check";
+                icon.parentElement.className = "w-16 h-16 bg-brand-gold/10 text-brand-gold rounded-full flex items-center justify-center text-3xl mx-auto";
+            } else {
+                icon.className = "fa-solid fa-triangle-exclamation";
+                icon.parentElement.className = "w-16 h-16 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center text-3xl mx-auto";
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        // Newsletter trigger
+        function subscribeNewsletter() {
+            showCustomModal("Aapka Dhanyawad!", "Aap humare design newsletter me safaltapoorvak shamil ho gaye hain!");
+        }
+
+        // Toggle Mobile Menu Drawer
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if(menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = "fa-solid fa-xmark text-2xl";
+            } else {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars text-2xl";
+            }
+        }
+
+        // 3D Canvas Customizer Setup using Three.js
+        let scene, camera, renderer, chairGroup;
+        let cushionMesh, backrestMesh, legGroup;
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+
+        function init3D() {
+            const canvas = document.getElementById('three-canvas');
+            const container = canvas.parentElement;
+
+            // Scene Creation
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0a0a0b); // deep luxury background
+
+            // Camera Creation
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+            camera.position.set(0, 1.5, 4.5);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(5, 8, 5);
+            dirLight.castShadow = true;
+            scene.add(dirLight);
+
+            const pointLight = new THREE.PointLight(0xc5a880, 0.5, 10);
+            pointLight.position.set(-2, 2, 2);
+            scene.add(pointLight);
+
+            // Create Stylish Furniture Group (Lounge Chair)
+            chairGroup = new THREE.Group();
+
+            // Material Definitions
+            const velvetMaterial = new THREE.MeshStandardMaterial({
+                color: new THREE.Color(currentFabricColor),
+                roughness: 0.8,
+                metalness: 0.1
+            });
+
+            const woodMaterial = new THREE.MeshStandardMaterial({
+                color: 0x2A1A10, // Dark Walnut by default
+                roughness: 0.6,
+                metalness: 0.1
+            });
+
+            const metalLegMaterial = new THREE.MeshStandardMaterial({
+                color: 0xD4AF37, // Golden tip accent
+                roughness: 0.2,
+                metalness: 0.9
+            });
+
+            // 1. Seat Cushion
+            const seatGeom = new THREE.BoxGeometry(1.6, 0.4, 1.6);
+            cushionMesh = new THREE.Mesh(seatGeom, velvetMaterial);
+            cushionMesh.position.y = 0.5;
+            cushionMesh.castShadow = true;
+            cushionMesh.receiveShadow = true;
+            chairGroup.add(cushionMesh);
+
+            // 2. Backrest (Curved/Inclined)
+            const backGeom = new THREE.BoxGeometry(1.6, 1.2, 0.3);
+            backrestMesh = new THREE.Mesh(backGeom, velvetMaterial);
+            backrestMesh.position.set(0, 1.2, -0.65);
+            backrestMesh.rotation.x = -0.15; // Slightly tilted back for elegance
+            backrestMesh.castShadow = true;
+            chairGroup.add(backrestMesh);
+
+            // 3. Leg Base structure
+            legGroup = new THREE.Group();
+
+            const createLeg = (x, z, angleX, angleZ) => {
+                const singleLeg = new THREE.Group();
+                const legGeom = new THREE.CylinderGeometry(0.04, 0.02, 0.6, 16);
+                const legMesh = new THREE.Mesh(legGeom, woodMaterial);
+                legMesh.position.y = -0.3;
+                legMesh.rotation.z = angleX;
+                legMesh.rotation.x = angleZ;
+                singleLeg.add(legMesh);
+
+                // Brass Gold Tip at bottom
+                const tipGeom = new THREE.CylinderGeometry(0.022, 0.02, 0.1, 16);
+                const tipMesh = new THREE.Mesh(tipGeom, metalLegMaterial);
+                tipMesh.position.y = -0.55;
+                tipMesh.rotation.z = angleX;
+                tipMesh.rotation.x = angleZ;
+                singleLeg.add(tipMesh);
+
+                singleLeg.position.set(x, 0.4, z);
+                return singleLeg;
+            };
+
+            legGroup.add(createLeg(-0.6, 0.6, 0.1, 0.1));   // Front Left
+            legGroup.add(createLeg(0.6, 0.6, -0.1, 0.1));   // Front Right
+            legGroup.add(createLeg(-0.6, -0.6, 0.1, -0.1)); // Back Left
+            legGroup.add(createLeg(0.6, -0.6, -0.1, -0.1)); // Back Right
+
+            chairGroup.add(legGroup);
+
+            // Elevate and scale chair
+            chairGroup.scale.set(1.2, 1.2, 1.2);
+            chairGroup.position.y = -0.4;
+            scene.add(chairGroup);
+
+            // Hide the loader inside container once loaded
+            document.getElementById('three-loader').classList.add('hidden');
+
+            // Interactive Drag/Rotate logic
+            const onPointerDown = (e) => {
+                isDragging = true;
+                previousMousePosition = {
+                    x: e.clientX || e.touches[0].clientX,
+                    y: e.clientY || e.touches[0].clientY
+                };
+            };
+
+            const onPointerMove = (e) => {
+                if (!isDragging) return;
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+                const deltaMove = {
+                    x: clientX - previousMousePosition.x,
+                    y: clientY - previousMousePosition.y
+                };
+
+                chairGroup.rotation.y += deltaMove.x * 0.007;
+                chairGroup.rotation.x += deltaMove.y * 0.007;
+
+                previousMousePosition = {
+                    x: clientX,
+                    y: clientY
+                };
+            };
+
+            const onPointerUp = () => {
+                isDragging = false;
+            };
+
+            // Event Listeners for Drag interaction (both mobile and desktop)
+            canvas.addEventListener('mousedown', onPointerDown);
+            window.addEventListener('mousemove', onPointerMove);
+            window.addEventListener('mouseup', onPointerUp);
+
+            canvas.addEventListener('touchstart', onPointerDown);
+            window.addEventListener('touchmove', onPointerMove);
+            window.addEventListener('touchend', onPointerUp);
+
+            // Keep responsiveness intact
+            window.addEventListener('resize', () => {
+                const width = container.clientWidth;
+                const height = container.clientHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            });
+
+            // Animation loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+
+                // Auto rotate slowly when idle
+                if (!isDragging) {
+                    chairGroup.rotation.y += 0.003;
+                }
+
+                renderer.render(scene, camera);
+            };
+
+            animate();
+        }
+
+        // Color changer trigger for the 3D chair
+        function changeChairColor(colorHex, colorName) {
+            currentFabricColor = colorHex;
+            document.getElementById('selected-fabric-name').innerText = colorName;
+
+            // Highlight chosen color button
+            const colorButtons = document.querySelectorAll('.color-btn');
+            colorButtons.forEach(btn => btn.classList.remove('border-brand-gold'));
+            event.currentTarget.classList.add('border-brand-gold');
+
+            if (cushionMesh && backrestMesh) {
+                // Animate material transition elegantly
+                gsap.to(cushionMesh.material.color, {
+                    r: new THREE.Color(colorHex).r,
+                    g: new THREE.Color(colorHex).g,
+                    b: new THREE.Color(colorHex).b,
+                    duration: 0.5
+                });
+                gsap.to(backrestMesh.material.color, {
+                    r: new THREE.Color(colorHex).r,
+                    g: new THREE.Color(colorHex).g,
+                    b: new THREE.Color(colorHex).b,
+                    duration: 0.5
+                });
+            }
+        }
+
+        // Wood finish selector for 3D Chair base
+        function changeWoodFinish(finishKey) {
+            currentWoodFinish = finishKey;
+            
+            // Toggle highlight styling
+            const woodButtons = document.querySelectorAll('.wood-btn');
+            woodButtons.forEach(btn => btn.classList.remove('border-brand-gold'));
+            event.currentTarget.classList.add('border-brand-gold');
+
+            let woodColor = 0x2A1A10; // default dark walnut
+            if (finishKey === 'honey-teak') {
+                woodColor = 0x8F501F;
+            }
+
+            if (legGroup) {
+                legGroup.children.forEach(leg => {
+                    const legMesh = leg.children[0];
+                    gsap.to(legMesh.material.color, {
+                        r: new THREE.Color(woodColor).r,
+                        g: new THREE.Color(woodColor).g,
+                        b: new THREE.Color(woodColor).b,
+                        duration: 0.5
+                    });
+                });
+            }
+        }
+
+        // Trigger loading of 3D canvas after DOM load
+        window.onload = function() {
+            init3D();
+        };
+
+        // ROOM PLANNER: Theme Switcher Engine
+        function switchRoomTheme(themeKey) {
+            const previewImg = document.getElementById('planner-preview-img');
+            
+            // Adjust buttons active styling
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            themeButtons.forEach(btn => {
+                btn.classList.remove('border-brand-gold');
+                btn.classList.add('border-white/5');
+                btn.querySelector('i:last-child').className = "fa-solid fa-chevron-right text-gray-400";
+            });
+
+            event.currentTarget.classList.add('border-brand-gold');
+            event.currentTarget.classList.remove('border-white/5');
+            event.currentTarget.querySelector('i:last-child').className = "fa-solid fa-chevron-right text-brand-gold";
+
+            // Map keys with beautiful room presets
+            let newSrc = "";
+            if (themeKey === 'scandi') {
+                newSrc = "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1200";
+            } else if (themeKey === 'bohemian') {
+                newSrc = "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&q=80&w=1200";
+            } else if (themeKey === 'luxury') {
+                newSrc = "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&q=80&w=1200";
+            }
+
+            // Smooth cross-fade transition
+            gsap.to(previewImg, {
+                opacity: 0.3, 
+                duration: 0.2, 
+                onComplete: () => {
+                    previewImg.src = newSrc;
+                    gsap.to(previewImg, { opacity: 1, duration: 0.4 });
+                }
+            });
+        }
+
+        // PRODUCTS DISCOVERY: Filtering engine
+        function filterProducts(category) {
+            // Highlight Selected Tab
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-brand-gold', 'text-brand-dark');
+                tab.classList.add('bg-white/5', 'text-gray-400');
+            });
+            event.currentTarget.classList.remove('bg-white/5', 'text-gray-400');
+            event.currentTarget.classList.add('bg-brand-gold', 'text-brand-dark');
+
+            // Toggle Card Visibilities
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    gsap.to(card, { scale: 1, opacity: 1, duration: 0.3, display: 'flex' });
+                } else {
+                    gsap.to(card, { scale: 0.95, opacity: 0, duration: 0.2, display: 'none' });
+                }
+            });
+        }
+
+        // BOOKING FORM ACTION
+        function handleConsultationForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('consult-name').value;
+            const room = document.getElementById('consult-room').value;
+
+            showCustomModal("Safalta!", `Dhanyawad ${name}! Aapka Free VIP consultation slot book ho chuka hai. Hamari team jald hi aapse contact karegi.`);
+            event.target.reset();
+        }
+
+        // CART CONTROLLER & STATE
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+            } else {
+                sidebar.classList.add('translate-x-full');
+            }
+        }
+
+        function addToCart(title, price, image) {
+            // Add custom items
+            cart.push({ title, price, image });
+            updateCartUI();
+
+            // Trigger visual popup toast notification
+            const toast = document.getElementById('toast');
+            gsap.to(toast, {
+                translateY: 0,
+                opacity: 1,
+                duration: 0.3,
+                onComplete: () => {
+                    setTimeout(() => {
+                        gsap.to(toast, { translateY: 100, opacity: 0, duration: 0.3 });
+                    }, 2000);
+                }
+            });
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countBadge = document.getElementById('cart-badge');
+            const cartCountHeader = document.getElementById('cart-count');
+            const itemsContainer = document.getElementById('cart-items');
+            const totalContainer = document.getElementById('cart-total');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+
+            countBadge.innerText = cart.length;
+            cartCountHeader.innerText = cart.length;
+
+            if (cart.length === 0) {
+                emptyMsg.style.display = 'block';
+                itemsContainer.innerHTML = '';
+                emptyMsg.after(itemsContainer);
+                totalContainer.innerText = '₹0';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+            itemsContainer.innerHTML = '';
+
+            let totalSum = 0;
+            cart.forEach((item, index) => {
+                totalSum += item.price;
+                const itemHTML = `
+                    <div class="flex items-center justify-between bg-white/5 p-3 rounded-xl border border-white/5">
+                        <div class="flex items-center space-x-3">
+                            <img src="${item.image}" alt="item" class="w-12 h-12 object-cover rounded-lg">
+                            <div>
+                                <h4 class="text-xs font-bold text-white">${item.title}</h4>
+                                <p class="text-xs text-brand-gold mt-1">₹${item.price.toLocaleString('en-IN')}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-400 p-2">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                        </button>
+                    </div>
+                `;
+                itemsContainer.innerHTML += itemHTML;
+            });
+
+            totalContainer.innerText = `₹${totalSum.toLocaleString('en-IN')}`;
+        }
+
+        function triggerCheckout() {
+            if(cart.length === 0) {
+                showCustomModal("Cart Khali Hai", "Kripya checkout karne se pehle cart me koi product add karein.", false);
+                return;
+            }
+            showCustomModal("Order Le Liya Gaya!", "Badhai ho! Aapka order book ho chuka hai aur hamari team fitting custom specifications ke liye aapse connect karegi.", true);
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // GSAP Scroll Trigger based Premium Entrance effects
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from("#hero h1", {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            delay: 0.2
+        });
+
+        gsap.from("#hero p", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 0.4
+        });
+
+        gsap.from("#hero-img", {
+            scale: 1.1,
+            duration: 1.5,
+            ease: "power2.out"
+        });
+    </script>
+</body>
+</html>
